@@ -1,5 +1,8 @@
-import { Base } from "../base";
-export class Project extends Base {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Project = void 0;
+const base_1 = require("../base");
+class Project extends base_1.Base {
     logView(custom_url, link_id) {
         var params = {
             custom_url: custom_url,
@@ -26,3 +29,4 @@ export class Project extends Base {
         return this.postRequest(`/api/external/referral`, params);
     }
 }
+exports.Project = Project;

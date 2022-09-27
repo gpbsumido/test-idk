@@ -1,7 +1,9 @@
-import { Base } from "./base";
-import { Project } from "./project";
-import { applyMixins } from "./utils";
-class Refmint extends Base {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const base_1 = require("./base");
+const project_1 = require("./project");
+const utils_1 = require("./utils");
+class Refmint extends base_1.Base {
 }
-applyMixins(Refmint, [Project]);
-export default Refmint;
+(0, utils_1.applyMixins)(Refmint, [project_1.Project]);
+exports.default = Refmint;
