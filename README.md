@@ -4,7 +4,7 @@ SDK for use with https://app.refmint.xyz or https://test.refmint.xyz
 
 ## Usage	
 
-###Log Referral Example:
+Log Referral Example:
 
 Arguments:<br />
 &emsp;custom_url: string // Custom URL of your project<br />
@@ -42,7 +42,7 @@ refmintClient.logReferral(custom_url,wallet_adress,link_id,email_address,phone_n
 
 ```
 
-###Log View Example:
+Log View Example:
 
 Arguments:<br />
 &emsp;custom_url: string // Custom URL of your project<br />
