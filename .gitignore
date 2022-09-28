@@ -3,8 +3,8 @@
 # dependencies
 /node_modules
 
-# testing
-/testing
+#refmint-example
+/example/node_modules
 
 # misc
 .DS_Store

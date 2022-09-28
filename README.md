@@ -22,11 +22,17 @@ Response:
 ```ts
 import Refmint from "refmint-sdk"
 
-const custom_url = 'custom-URL';
+const custom_url = 'refmintsdk';
 const wallet_adress = '0x123abc456def';
-const link_id = '179Do0MI';
+const link_id = 'fqOm45Jv';
 const email_address = '179Do0MI';
 const phone_number = '1234567890'
+const api_key = 'reYam27iBtMqeGuEhR2ywSV6440wo3gx2CcIC5IK6RNHRCvBoKAHdsNx3FyLz2t1';
+
+var refmintClient = new Refmint({
+	apiKey: api_key,
+	baseUrl: "https://test.refmint.xyz"
+});
 
 refmintClient.logReferral(custom_url,wallet_adress,link_id,email_address,phone_number).then((resp) => {
 	//do something...

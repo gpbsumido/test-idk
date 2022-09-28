@@ -15,7 +15,7 @@ export class Project extends Base {
     }
     if (link_id) params.link_id = link_id;
 
-    return this.postRequest(`/api/external/view`,params);
+    return this.postRequest(`/external/view`,params);
   }
 
   logReferral(
@@ -46,7 +46,7 @@ export class Project extends Base {
     if (twitter) params.twitter = twitter;
     if (discord) params.discord = discord;
 
-    return this.postRequest(`/api/external/referral`,params);
+    return this.postRequest(`/external/referral`,params);
   }
   
 }

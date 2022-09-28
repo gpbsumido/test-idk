@@ -9,7 +9,7 @@ class Project extends base_1.Base {
         };
         if (link_id)
             params.link_id = link_id;
-        return this.postRequest(`/api/external/view`, params);
+        return this.postRequest(`/external/view`, params);
     }
     logReferral(custom_url, wallet_address, link_id, email, phone, twitter, discord) {
         var params = {
@@ -26,7 +26,7 @@ class Project extends base_1.Base {
             params.twitter = twitter;
         if (discord)
             params.discord = discord;
-        return this.postRequest(`/api/external/referral`, params);
+        return this.postRequest(`/external/referral`, params);
     }
 }
 exports.Project = Project;
