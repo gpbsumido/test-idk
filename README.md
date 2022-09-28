@@ -1,6 +1,6 @@
 # refmint-sdk
 
-SDK for use with https://app.refmint.xyz
+SDK for use with https://app.refmint.xyz or https://test.refmint.xyz
 
 ## Usage	
 
