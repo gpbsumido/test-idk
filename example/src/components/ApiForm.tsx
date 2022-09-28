@@ -2,8 +2,13 @@ import React from 'react';
 import { useState } from "react";
 import Refmint from "refmint-sdk";
 import { InputSection } from "./InputSection";
+import {useLocation} from "react-router-dom";
 
 export function ApiForm() {
+
+
+  const search = useLocation().search;
+  const new_referral_link = new URLSearchParams(search).get('r');
 
   async function logReferral() {
 
@@ -29,7 +34,7 @@ export function ApiForm() {
 
   const [custom_url,set_custom_url] = useState<string>('refmintsdk');
   const [wallet_address,set_wallet_address] = useState<string>('');
-  const [link_id,set_link_id] = useState<string>('fqOm45Jv');
+  const [link_id,set_link_id] = useState<string>(new_referral_link ? new_referral_link : 'fqOm45Jv');
   const [email_address,set_email_address] = useState<string>('');
   const [phone_number,set_phone_number] = useState<string>('');
   const [sdk_response,set_sdk_response] = useState<string>('');
