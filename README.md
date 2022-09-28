@@ -13,11 +13,11 @@ Arguments:
 	email_address (optional): email address of the referred new user
 	phone_number (optional): phone number of the referred new user
 
-Response:
-	{
-		referral_link: link to raffle refferal page,
-		referral_id: affiliate referral_id of the referred user
-	}
+Response:<br />
+&emsp;{<br />
+&emsp;&emsp;referral_link: string // ink to raffle refferal page,<br />
+&emsp;&emsp;referral_id: string // affiliate referral_id of the referred user<br />
+&emsp;}<br />
 
 ```ts
 import Refmint from "refmint-sdk"
@@ -44,15 +44,11 @@ refmintClient.logReferral(custom_url,wallet_adress,link_id,email_address,phone_n
 
 Log View Example:
 
-Arguments:
-	custom_url: Custom URL of your project
-	link_id: affiliate referral_id of the referrer
-
-Response:
-	{
-		referral_link: link to raffle refferal page,
-		referral_id: affiliate referral_id of the referred user
-	}
+Response:<br />
+&emsp;{<br />
+&emsp;&emsp;referral_link: string // link to raffle refferal page,<br />
+&emsp;&emsp;referral_id: string // affiliate referral_id of the referred user<br />
+&emsp;}<br />
 
 
 ```ts
