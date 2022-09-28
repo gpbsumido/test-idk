@@ -22,12 +22,12 @@ Response:
 ```ts
 import Refmint from "refmint-sdk"
 
-const custom_url = 'refmintsdk';
-const wallet_adress = '0x123abc456def';
-const link_id = 'fqOm45Jv';
-const email_address = '179Do0MI';
-const phone_number = '1234567890'
-const api_key = 'reYam27iBtMqeGuEhR2ywSV6440wo3gx2CcIC5IK6RNHRCvBoKAHdsNx3FyLz2t1';
+const custom_url = 'refmintsdk'; //example project on testnet
+const wallet_adress = '0x123abc456def'; //insert wallet of referree here
+const link_id = 'fqOm45Jv'; //example link id for an affiliate on the example project
+const email_address = ''; // (optional) insert referree email here
+const phone_number = '1234567890' // (optional) insert referree phone number here
+const api_key = 'reYam27iBtMqeGuEhR2ywSV6440wo3gx2CcIC5IK6RNHRCvBoKAHdsNx3FyLz2t1'; //demo api key for testnet
 
 var refmintClient = new Refmint({
 	apiKey: api_key,
@@ -60,8 +60,14 @@ import Refmint from "refmint-sdk"
 
 //Log Referral Example:
 
-const custom_url = 'custom-URL';
-const link_id = '179Do0MI';
+const custom_url = 'refmintsdk'; //example project on testnet
+const link_id = 'fqOm45Jv'; //example link id for an affiliate on the example project
+const api_key = 'reYam27iBtMqeGuEhR2ywSV6440wo3gx2CcIC5IK6RNHRCvBoKAHdsNx3FyLz2t1'; //demo api key for testnet
+
+var refmintClient = new Refmint({
+	apiKey: api_key,
+	baseUrl: "https://test.refmint.xyz"
+});
 
 refmintClient.logView(custom_url,link_id).then((resp) => {
 	//do something...
