@@ -6,12 +6,12 @@ SDK for use with https://app.refmint.xyz
 
 Log Referral Example:
 
-Arguments:
-	custom_url: Custom URL of your project
-	wallet_adress: wallet_adress of the new user being referred
-	link_id: affiliate referral_id of the referrer
-	email_address (optional): email address of the referred new user
-	phone_number (optional): phone number of the referred new user
+Arguments:<br />
+&emsp;custom_url: Custom URL of your project<br />
+&emsp;wallet_adress: wallet_adress of the new user being referred<br />
+&emsp;link_id: affiliate referral_id of the referrer<br />
+&emsp;email_address (optional): email address of the referred new user<br />
+&emsp;phone_number (optional): phone number of the referred new user<br />
 
 Response:<br />
 &emsp;{<br />
@@ -43,6 +43,10 @@ refmintClient.logReferral(custom_url,wallet_adress,link_id,email_address,phone_n
 ```
 
 Log View Example:
+
+Arguments:<br />
+&emsp;custom_url: Custom URL of your project<br />
+&emsp;link_id: affiliate referral_id of the referrer<br />
 
 Response:<br />
 &emsp;{<br />
