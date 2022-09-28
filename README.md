@@ -72,6 +72,6 @@ var refmintClient = new Refmint({
 refmintClient.logView(custom_url,link_id).then((resp) => {
 	//do something...
 }).catch(e => {
-  console.log(e)
+	console.log(e)
 });
 ```
