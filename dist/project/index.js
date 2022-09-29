@@ -33,6 +33,7 @@ class Project extends base_1.Base {
             custom_url: custom_url,
             wallet_address: wallet_address
         };
+        console.log('this is in project', params);
         return this.getRequest(`/external/is-affiliate`, params);
     }
     affiliateLink(custom_url, wallet_address) {
@@ -40,6 +41,7 @@ class Project extends base_1.Base {
             custom_url: custom_url,
             wallet_address: wallet_address
         };
+        console.log('this is in project', params);
         return this.getRequest(`/external/affiliate`, params);
     }
 }

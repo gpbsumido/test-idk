@@ -16,8 +16,13 @@ class Base {
             "Content-Type": "application/json",
             "x-api-key": this.apiKey,
         };
-        const config = Object.assign(Object.assign({}, options), { headers });
+        const config = {
+            params: options,
+            headers: headers,
+        };
+        console.log('outside', config);
         return new Promise((resolve, reject) => {
+            console.log('inside', config);
             axios_1.default
                 .get(`${url}`, config)
                 .then((resp) => {

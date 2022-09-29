@@ -21,11 +21,12 @@ export abstract class Base {
       "x-api-key": this.apiKey,
     };
     const config = {
-      ...options,
-      headers,
+      params: options,
+      headers: headers,
     };
-
+    console.log('outside',config)
     return new Promise((resolve, reject) => {
+      console.log('inside',{params:options},config)
       axios
         .get(`${url}`,config)
         .then((resp) => {
