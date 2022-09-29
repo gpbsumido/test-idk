@@ -32,6 +32,48 @@ export function ApiForm() {
     });
   }
 
+  async function logView() {
+
+    var refmintCaller = new Refmint({
+      apiKey: api_key,
+      baseUrl: "http://localhost:3000"
+    });
+    
+    refmintCaller.logView(
+      custom_url,
+      link_id
+    ).then((resp) => {
+      if (!resp) set_sdk_response('API failed.')
+      set_sdk_response(JSON.stringify(resp));
+    }).catch(e => {
+      console.log(e);
+      set_sdk_response(e.message)
+    });
+  }
+
+  async function isAffiliate() {
+
+    var refmintCaller = new Refmint({
+      apiKey: api_key,
+      baseUrl: 'http://localhost:3000'
+    });
+
+    console.log(
+      custom_url,
+      wallet_address)
+    
+    refmintCaller.isAffiliate(
+      custom_url,
+      wallet_address
+    ).then((resp) => {
+      if (!resp) set_sdk_response('API failed.')
+      set_sdk_response(JSON.stringify(resp));
+    }).catch(e => {
+      console.log(e);
+      set_sdk_response(e.message)
+    });
+  }
+
   const [custom_url,set_custom_url] = useState<string>('refmintsdk');
   const [wallet_address,set_wallet_address] = useState<string>('');
   const [link_id,set_link_id] = useState<string>(new_referral_link ? new_referral_link : 'fqOm45Jv');
@@ -115,7 +157,7 @@ export function ApiForm() {
       </div>
       <button
         className='w-min mx-auto px-3 mt-5 bg-referralMintColor rounded-lg'
-        onClick={()=>logReferral()}
+        onClick={()=>isAffiliate()}
       >
         Submit
       </button>
