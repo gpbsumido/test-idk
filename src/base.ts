@@ -24,9 +24,7 @@ export abstract class Base {
       params: options,
       headers: headers,
     };
-    console.log('outside',config)
     return new Promise((resolve, reject) => {
-      console.log('inside',{params:options},config)
       axios
         .get(`${url}`,config)
         .then((resp) => {

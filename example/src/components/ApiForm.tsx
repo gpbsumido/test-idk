@@ -14,7 +14,7 @@ export function ApiForm() {
 
     var refmintCaller = new Refmint({
       apiKey: api_key,
-      baseUrl: base_url
+      baseUrl: base_url !== '' ? base_url : 'https://test.refmint.xyz'
     });
     
     refmintCaller.logReferral(
@@ -36,7 +36,7 @@ export function ApiForm() {
 
     var refmintCaller = new Refmint({
       apiKey: api_key,
-      baseUrl: "http://localhost:3000"
+      baseUrl: base_url !== '' ? base_url : 'https://test.refmint.xyz'
     });
     
     refmintCaller.logView(
@@ -55,12 +55,8 @@ export function ApiForm() {
 
     var refmintCaller = new Refmint({
       apiKey: api_key,
-      baseUrl: 'http://localhost:3000'
+      baseUrl: base_url !== '' ? base_url : 'https://test.refmint.xyz'
     });
-
-    console.log(
-      custom_url,
-      wallet_address)
     
     refmintCaller.isAffiliate(
       custom_url,
@@ -71,6 +67,25 @@ export function ApiForm() {
     }).catch(e => {
       console.log(e);
       set_sdk_response(e.message)
+    });
+  }
+
+  async function affiliateLink() {
+
+    var refmintCaller = new Refmint({
+      apiKey: api_key,
+      baseUrl: base_url !== '' ? base_url : 'https://test.refmint.xyz'
+    });
+    
+    refmintCaller.affiliateLink(
+      custom_url,
+      wallet_address
+    ).then((resp) => {
+      if (!resp) set_sdk_response('API failed.')
+      set_sdk_response(JSON.stringify(resp));
+    }).catch(e => {
+      console.log(e);
+      set_sdk_response(e.response.data.message);
     });
   }
 
@@ -155,12 +170,32 @@ export function ApiForm() {
         isTextField={false}
       />
       </div>
-      <button
-        className='w-min mx-auto px-3 mt-5 bg-referralMintColor rounded-lg'
-        onClick={()=>isAffiliate()}
-      >
-        Submit
-      </button>
+      <div className='flex flex-row space-x-3 mx-auto'>
+        <button
+          className='w-min px-3 mt-5 bg-referralMintColor rounded-lg whitespace-nowrap'
+          onClick={()=>logView()}
+        >
+          LogView
+        </button>
+        <button
+          className='w-min px-3 mt-5 bg-referralMintColor rounded-lg whitespace-nowrap'
+          onClick={()=>logReferral()}
+        >
+          Log Referral
+        </button>
+        <button
+          className='w-min px-3 mt-5 bg-referralMintColor rounded-lg whitespace-nowrap'
+          onClick={()=>isAffiliate()}
+        >
+          IsAffiliate
+        </button>
+        <button
+          className='w-min px-3 mt-5 bg-referralMintColor rounded-lg whitespace-nowrap'
+          onClick={()=>affiliateLink()}
+        >
+          Affiliate Link
+        </button>
+        </div>
       <div className="w-full flex flex-row justify-center">
         <InputSection
           title='Response'

@@ -7518,10 +7518,10 @@
     "indent-string" "^4.0.0"
     "strip-indent" "^3.0.0"
 
-"refmint-sdk@^1.1.5":
-  "integrity" "sha512-roXsMwfD8Xusb9zOUFESzSqexspkHRvjqMTBSFVtx8GJw7t7ncJTvV+RnHFXQBhEPqtgSv7TIcn1kqWoRsfnsg=="
-  "resolved" "https://registry.npmjs.org/refmint-sdk/-/refmint-sdk-1.1.5.tgz"
-  "version" "1.1.5"
+"refmint-sdk@^1.1.6":
+  "integrity" "sha512-OLB6xsH6ePsMi1jsFK2/MRbubYaklbgnRsAEllkSrxFQnYWGgMid9T9o1YuvXkzz3stz+IoZliYXEYJ7ajClqg=="
+  "resolved" "https://registry.npmjs.org/refmint-sdk/-/refmint-sdk-1.1.6.tgz"
+  "version" "1.1.6"
   dependencies:
     "axios" "^0.27.2"
 

@@ -22,7 +22,7 @@ class Base {
         };
         console.log('outside', config);
         return new Promise((resolve, reject) => {
-            console.log('inside', config);
+            console.log('inside', { params: options }, config);
             axios_1.default
                 .get(`${url}`, config)
                 .then((resp) => {
