@@ -48,5 +48,37 @@ export class Project extends Base {
 
     return this.postRequest(`/external/referral`,params);
   }
+
+  isAffiliate(
+    custom_url:string,
+    wallet_address: string,
+  ): Promise<boolean> {
+
+    var params:{
+      custom_url:string,
+      wallet_address: string
+    } = { 
+      custom_url: custom_url,
+      wallet_address: wallet_address
+    }
+
+    return this.getRequest(`/external/is-affiliate`,params);
+  }
+
+  affiliateLink(
+    custom_url:string,
+    wallet_address: string,
+  ): Promise<{referral_link: string, referral_id: string}> {
+
+    var params:{
+      custom_url:string,
+      wallet_address: string
+    } = { 
+      custom_url: custom_url,
+      wallet_address: wallet_address
+    }
+
+    return this.getRequest(`/external/affiliate`,params);
+  }
   
 }

@@ -8,4 +8,9 @@ export declare class Project extends Base {
         referral_link: string;
         referral_id: string;
     }>;
+    isAffiliate(custom_url: string, wallet_address: string): Promise<boolean>;
+    affiliateLink(custom_url: string, wallet_address: string): Promise<{
+        referral_link: string;
+        referral_id: string;
+    }>;
 }

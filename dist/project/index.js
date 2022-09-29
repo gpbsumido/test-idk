@@ -28,5 +28,19 @@ class Project extends base_1.Base {
             params.discord = discord;
         return this.postRequest(`/external/referral`, params);
     }
+    isAffiliate(custom_url, wallet_address) {
+        var params = {
+            custom_url: custom_url,
+            wallet_address: wallet_address
+        };
+        return this.getRequest(`/external/is-affiliate`, params);
+    }
+    affiliateLink(custom_url, wallet_address) {
+        var params = {
+            custom_url: custom_url,
+            wallet_address: wallet_address
+        };
+        return this.getRequest(`/external/affiliate`, params);
+    }
 }
 exports.Project = Project;
