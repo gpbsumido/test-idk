@@ -96,7 +96,7 @@ export function ApiForm() {
   const [phone_number,set_phone_number] = useState<string>('');
   const [sdk_response,set_sdk_response] = useState<string>('');
   const [base_url,set_base_url] = useState<string>('https://test.refmint.xyz');
-  const [api_key,set_api_key] = useState<string>('reYam27iBtMqeGuEhR2ywSV6440wo3gx2CcIC5IK6RNHRCvBoKAHdsNx3FyLz2t1');
+  const [api_key,set_api_key] = useState<string>('kLJfpVvWZ0ERxnMofhP9iRJTxwDapndo8941KuxK76XOOvsyMVsXjihnRTA0R06y');
 
   return(
     <div className='mx-auto flex flex-col max-w-[calc(min(50%,1200px))]'>
