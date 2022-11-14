@@ -1,14 +1,14 @@
 import { Base } from "../base";
 export declare class Leaderboards extends Base {
-    addScore(wallet_address: string, score: number, project_id: string): Promise<{
+    addScore(project_id: string, wallet_address: string, score: number): Promise<{
+        project_id: string;
         wallet_address: string;
         score: number;
-        project_id: string;
     }>;
-    queryLeaderboard(order: string, top: number, skip: number, project_id: string): Promise<{
-        order: string;
+    queryLeaderboard(project_id: string, order_by: string, top: number, skip: number): Promise<{
+        project_id: string;
+        order_by: string;
         top: number;
         skip: number;
-        project_id: string;
     }>;
 }
