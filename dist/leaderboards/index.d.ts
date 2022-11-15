@@ -12,4 +12,8 @@ export declare class Leaderboards extends Base {
         page: number;
         with_points_only: boolean;
     }>;
+    myScore(custom_url: string, wallet_address: string): Promise<{
+        custom_url: string;
+        wallet_address: string;
+    }>;
 }

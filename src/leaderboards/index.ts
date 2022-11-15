@@ -22,7 +22,6 @@ export class Leaderboards extends Base {
     return this.getRequest(`/external/leaderboard/add-score`,params);
   }
 
-  //todo: cap the top at 100
   //order by: referrals and score
   queryLeaderboard(
     custom_url: string,
@@ -51,6 +50,22 @@ export class Leaderboards extends Base {
     }
 
     return this.postRequest(`/external/leaderboard`,params);
+  }
+  
+  myScore(
+    custom_url: string,
+    wallet_address: string
+  ): Promise<{custom_url: string, wallet_address: string}> {
+
+    var params:{
+      custom_url: string,
+      wallet_address: string
+    } = { 
+      custom_url: custom_url,
+      wallet_address: wallet_address
+    }
+
+    return this.getRequest(`/external/leaderboard/user`,params);
   }
 
 }
