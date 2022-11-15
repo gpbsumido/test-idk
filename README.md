@@ -56,11 +56,7 @@ Arguments:<br />
 &emsp;custom_url: string // Custom URL of your project<br />
 &emsp;link_id: string // affiliate referral_id of the referrer<br />
 
-Response:<br />
-&emsp;{<br />
-&emsp;&emsp;referral_link: string // link to raffle refferal page,<br />
-&emsp;&emsp;referral_id: string // affiliate referral_id of the referred user<br />
-&emsp;}<br />
+Response: N/A
 
 
 ```ts
