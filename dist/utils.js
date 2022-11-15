@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.applyMixins = void 0;
+exports.ORDER_BY_SELECTION = exports.applyMixins = void 0;
 function applyMixins(derivedCtor, baseCtors) {
     baseCtors.forEach((baseCtor) => {
         Object.getOwnPropertyNames(baseCtor.prototype).forEach((name) => {
@@ -13,3 +13,4 @@ function applyMixins(derivedCtor, baseCtors) {
     });
 }
 exports.applyMixins = applyMixins;
+exports.ORDER_BY_SELECTION = ['score', 'referral'];
