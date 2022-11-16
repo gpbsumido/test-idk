@@ -245,3 +245,41 @@ refmintClient.queryLeaderboard(custom_url,order_by,page_size,page,with_points_on
 });
 
 ```
+
+
+My Score Example:
+
+Arguments:<br />
+&emsp;custom_url: string // Custom URL of your project<br />
+&emsp;wallet_address: string // the wallet address of the user to check for a score<br />
+
+Response:<br />
+An Object:<br />
+&emsp;{<br />
+&emsp;&emsp;created_at: number, // date this user object for the leaderboard was created <br />
+&emsp;&emsp;project_id: string, // unique ID for the project<br />
+&emsp;&emsp;referral: number, // number of referrals by the user for the project<br />
+&emsp;&emsp;score: number, // the user's score for the project<br />
+&emsp;&emsp;updated_at: number, // the date the user was last updated<br />
+&emsp;&emsp;wallet_address: string, // the user's wallet address<br />
+&emsp;&emsp;_id_: string, // the user's unique id for the project<br />
+&emsp;}<br />
+
+```ts
+import Refmint from "refmint-sdk"
+
+const custom_url = 'refmintsdk'; //example project on testnet
+const wallet_address = '0x123abc456def'; // order the leaderboard by highgest score
+
+var refmintClient = new Refmint({
+	apiKey: api_key,
+	baseUrl: "https://test.refmint.xyz"
+});
+
+refmintClient.myScore(custom_url,wallet_address).then((resp) => {
+	//do something...
+}).catch(e => {
+	console.log(e);
+});
+
+```
