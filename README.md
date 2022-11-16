@@ -173,7 +173,7 @@ Add Score Example:
 
 Arguments:<br />
 &emsp;custom_url: string // Custom URL of your project<br />
-&emsp;wallet_adress: string // wallet_adress of the new user being referred<br />
+&emsp;wallet_adress: string // wallet_adress of the user whose score we want to add to<br />
 &emsp;score: number // how much to add to user score<br />
 
 Response: N/A
@@ -182,7 +182,7 @@ Response: N/A
 import Refmint from "refmint-sdk"
 
 const custom_url = 'refmintsdk'; // custom url for the project
-const wallet_adress = '0x123abc456def'; // wallet address for the user to be added a score for
+const wallet_adress = '0x123abc456def'; // wallet address for the user
 const score = 10; // add 10 to the user's score
 
 var refmintClient = new Refmint({
@@ -212,15 +212,15 @@ An array of objects:<br />
 [<br />
 &emsp;{<br />
 &emsp;&emsp;created_at: number, // date this user object for the leaderboard was created <br />
-&emsp;&emsp;project_id: number, // unique ID for the project<br />
+&emsp;&emsp;project_id: string, // unique ID for the project<br />
 &emsp;&emsp;referral: number, // number of referrals by the user for the project<br />
 &emsp;&emsp;score: number, // the user's score for the project<br />
 &emsp;&emsp;updated_at: number, // the date the user was last updated<br />
-&emsp;&emsp;wallet_address: number, // the user's wallet address<br />
-&emsp;&emsp;_id_: number, // the user's unique id for the project<br />
+&emsp;&emsp;wallet_address: string, // the user's wallet address<br />
+&emsp;&emsp;_id_: string, // the user's unique id for the project<br />
 &emsp;}<br />
 &emsp;,{<br />
-&emsp;&emsp;...
+&emsp;&emsp;...<br />
 &emsp;}<br />
 ]
 
