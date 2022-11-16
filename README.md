@@ -167,3 +167,81 @@ refmintClient.affiliateLink(
 	console.log(e);
 });
 ```
+
+
+Add Score Example:
+
+Arguments:<br />
+&emsp;custom_url: string // Custom URL of your project<br />
+&emsp;wallet_adress: string // wallet_adress of the new user being referred<br />
+&emsp;score: number // how much to add to user score<br />
+
+Response: N/A
+
+```ts
+import Refmint from "refmint-sdk"
+
+const custom_url = 'refmintsdk'; // custom url for the project
+const wallet_adress = '0x123abc456def'; // wallet address for the user to be added a score for
+const score = 10; // add 10 to the user's score
+
+var refmintClient = new Refmint({
+	apiKey: api_key,
+	baseUrl: "https://test.refmint.xyz"
+});
+
+refmintClient.addScore(custom_url,wallet_adress,score).then((resp) => {
+	//do something...
+}).catch(e => {
+	console.log(e);
+});
+
+```
+
+Query Leaderboard Example:
+
+Arguments:<br />
+&emsp;custom_url: string // Custom URL of your project<br />
+&emsp;order_by: string // what to sort leaderboard by 'score' or referral<br />
+&emsp;page_size: number // how many users to include in query result<br />
+&emsp;page: number // which page of users to return, ie set to page to 2 and page size to 1o if you want users 11-20<br />
+&emsp;with_points_only: boolean // whether to only include users with a score or not<br />
+
+Response:<br />
+An array of objects:<br />
+[<br />
+&emsp;{<br />
+&emsp;&emsp;created_at: number, // date this user object for the leaderboard was created <br />
+&emsp;&emsp;project_id: number, // unique ID for the project<br />
+&emsp;&emsp;referral: number, // number of referrals by the user for the project<br />
+&emsp;&emsp;score: number, // the user's score for the project<br />
+&emsp;&emsp;updated_at: number, // the date the user was last updated<br />
+&emsp;&emsp;wallet_address: number, // the user's wallet address<br />
+&emsp;&emsp;_id_: number, // the user's unique id for the project<br />
+&emsp;}<br />
+&emsp;,{<br />
+&emsp;&emsp;...
+&emsp;}<br />
+]
+
+```ts
+import Refmint from "refmint-sdk"
+
+const custom_url = 'refmintsdk'; //example project on testnet
+const order_by = 'score'; // order the leaderboard by highgest score
+const page_size = 10; // include 10 users in this request
+const page = 1; // get the first (page_size) users , i.e. users 1-10 in this case with the top score
+const with_points_only = true; // only include users in the list of their score is greater than 0
+
+var refmintClient = new Refmint({
+	apiKey: api_key,
+	baseUrl: "https://test.refmint.xyz"
+});
+
+refmintClient.queryLeaderboard(custom_url,order_by,page_size,page,with_points_only).then((resp) => {
+	//do something...
+}).catch(e => {
+	console.log(e);
+});
+
+```
