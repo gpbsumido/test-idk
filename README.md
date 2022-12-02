@@ -169,7 +169,7 @@ refmintClient.affiliateLink(
 ```
 
 
-Add Score Example:
+Modify Score Example:
 
 Arguments:<br />
 &emsp;custom_url: string // Custom URL of your project<br />
@@ -190,7 +190,7 @@ var refmintClient = new Refmint({
 	baseUrl: "https://test.refmint.xyz"
 });
 
-refmintClient.addScore(custom_url,wallet_adress,score).then((resp) => {
+refmintClient.modifyScore(custom_url,wallet_adress,score).then((resp) => {
 	//do something...
 }).catch(e => {
 	console.log(e);
