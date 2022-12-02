@@ -1,6 +1,6 @@
 import { Base } from "../base";
 export declare class Leaderboards extends Base {
-    addScore(custom_url: string, wallet_address: string, score: number): Promise<{
+    modifyScore(custom_url: string, wallet_address: string, score: number): Promise<{
         custom_url: string;
         wallet_address: string;
         score: number;
