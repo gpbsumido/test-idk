@@ -4,13 +4,13 @@ exports.Leaderboards = void 0;
 const base_1 = require("../base");
 const utils_1 = require("../utils");
 class Leaderboards extends base_1.Base {
-    addScore(custom_url, wallet_address, score) {
+    modifyScore(custom_url, wallet_address, score) {
         var params = {
             custom_url: custom_url,
             wallet_address: wallet_address,
             score: score
         };
-        return this.getRequest(`/external/leaderboard/add-score`, params);
+        return this.getRequest(`/external/leaderboard/modify-score`, params);
     }
     //order by: referrals and score
     queryLeaderboard(custom_url, order_by, page_size, page, with_points_only) {

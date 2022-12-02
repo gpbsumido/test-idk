@@ -3,7 +3,7 @@ import { ORDER_BY_SELECTION } from "../utils";
 
 export class Leaderboards extends Base {
   
-  addScore(
+  modifyScore(
     custom_url: string,
     wallet_address: string,
     score: number
@@ -19,7 +19,7 @@ export class Leaderboards extends Base {
       score: score
     }
 
-    return this.getRequest(`/external/leaderboard/add-score`,params);
+    return this.getRequest(`/external/leaderboard/modify-score`,params);
   }
 
   //order by: referrals and score
