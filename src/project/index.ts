@@ -5,7 +5,7 @@ export class Project extends Base {
   logView(
     custom_url:string,
     link_id?:string
-  ): Promise<{referral_link: string, referral_id:string}> {
+  ): Promise<string|null> {
 
     var params:{
       custom_url:string,

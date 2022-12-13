@@ -7,7 +7,7 @@ export class Leaderboards extends Base {
     custom_url: string,
     wallet_address: string,
     score: number
-  ): Promise<{custom_url: string, wallet_address: string, score: number}> {
+  ): Promise<string | null> {
 
     var params:{
       custom_url: string,
@@ -29,8 +29,7 @@ export class Leaderboards extends Base {
     page_size: number,
     page: number,
     with_points_only: boolean
-  ): Promise<{custom_url: string, order_by: string, page_size: number, page: number, with_points_only: boolean}> {
-
+  ): Promise<{_id: string, project_id: string, wallet_address: string, score: number, referral: string, updated_at: string, created_at: string}> {
     if (!ORDER_BY_SELECTION.includes(order_by)) {
       throw new Error("INVALID_ORDER_BY_SELECTION");
     }
@@ -55,7 +54,7 @@ export class Leaderboards extends Base {
   myScore(
     custom_url: string,
     wallet_address: string
-  ): Promise<{custom_url: string, wallet_address: string}> {
+  ): Promise<number> {
 
     var params:{
       custom_url: string,
