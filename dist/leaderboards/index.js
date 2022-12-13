@@ -10,7 +10,7 @@ class Leaderboards extends base_1.Base {
             wallet_address: wallet_address,
             score: score
         };
-        return this.getRequest(`/external/leaderboard/modify-score`, params);
+        return this.postRequest(`/external/leaderboard/modify-score`, params);
     }
     //order by: referrals and score
     queryLeaderboard(custom_url, order_by, page_size, page, with_points_only) {
@@ -24,7 +24,7 @@ class Leaderboards extends base_1.Base {
             page: page,
             with_points_only: with_points_only
         };
-        return this.postRequest(`/external/leaderboard`, params);
+        return this.getRequest(`/external/leaderboard`, params);
     }
     myScore(custom_url, wallet_address) {
         var params = {

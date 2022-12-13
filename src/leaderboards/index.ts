@@ -19,7 +19,7 @@ export class Leaderboards extends Base {
       score: score
     }
 
-    return this.getRequest(`/external/leaderboard/modify-score`,params);
+    return this.postRequest(`/external/leaderboard/modify-score`,params);
   }
 
   //order by: referrals and score
@@ -49,7 +49,7 @@ export class Leaderboards extends Base {
       with_points_only: with_points_only
     }
 
-    return this.postRequest(`/external/leaderboard`,params);
+    return this.getRequest(`/external/leaderboard`,params);
   }
   
   myScore(
