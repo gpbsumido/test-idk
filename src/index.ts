@@ -1,11 +1,11 @@
 import { Base } from "./base";
-import { Leaderboards } from "./leaderboards";
-import { Project } from "./project";
+import { Game } from "./game";
+import { NFT } from "./nft";
 import { applyMixins } from "./utils";
 
 class Refmint extends Base {}
-interface Refmint extends Leaderboards,Project {}
+interface Refmint extends Game,NFT {}
 
-applyMixins(Refmint, [Leaderboards,Project]);
+applyMixins(Refmint, [Game,NFT]);
 
 export default Refmint;

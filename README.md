@@ -273,3 +273,64 @@ refmintClient.myScore(custom_url,campaign_url,wallet_address).then((resp) => {
 });
 
 ```
+
+
+Add Users Example:
+
+Arguments:<br />
+&emsp;custom_url: string // Custom URL of your project<br />
+&emsp;campaign_url: string // Custom URL of your campaign<br />
+&emsp;wallet_address: string // the wallet address of the user to check for a score<br />
+
+Response: N/A
+
+```ts
+import Refmint from "refmint-sdk"
+
+const custom_url = 'refmintsdk'; //example project on testnet
+const campaign_url = 'myCampaignURL'; // order the leaderboard by highgest score
+const wallet_addressess = ['0x123abc456def']; // array of wallet addresses
+
+var refmintClient = new Refmint({
+	apiKey: api_key,
+	baseUrl: "https://test.refmint.xyz"
+});
+
+refmintClient.addUsers(custom_url,campaign_url,wallet_addressess).then((resp) => {
+	//do something...
+}).catch(e => {
+	console.log(e);
+});
+
+```
+
+
+Is User Example:
+
+Arguments:<br />
+&emsp;custom_url: string // Custom URL of your project<br />
+&emsp;campaign_url: string // Custom URL of your campaign<br />
+&emsp;wallet_address: string[] // array of wallet addressesd to be added as users to a campaign<br />
+
+Response: boolean
+
+```ts
+import Refmint from "refmint-sdk"
+
+const custom_url = 'refmintsdk'; //example project on testnet
+const campaign_url = 'myCampaignURL'; // order the leaderboard by highgest score
+const wallet_address = '0x123abc456def'; //wallet address to check
+
+
+var refmintClient = new Refmint({
+	apiKey: api_key,
+	baseUrl: "https://test.refmint.xyz"
+});
+
+refmintClient.addUsers(custom_url,campaign_url,wallet_address).then((resp) => {
+	//do something...
+}).catch(e => {
+	console.log(e);
+});
+
+```

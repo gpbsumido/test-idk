@@ -1,8 +1,8 @@
 import { Base } from "./base";
-import { Leaderboards } from "./leaderboards";
-import { Project } from "./project";
+import { Game } from "./game";
+import { NFT } from "./nft";
 declare class Refmint extends Base {
 }
-interface Refmint extends Leaderboards, Project {
+interface Refmint extends Game, NFT {
 }
 export default Refmint;
