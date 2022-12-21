@@ -5,16 +5,19 @@ export class Leaderboards extends Base {
   
   modifyScore(
     custom_url: string,
+    campaign_url: string,
     wallet_address: string,
     score: number
   ): Promise<string | null> {
 
     var params:{
       custom_url: string,
+      campaign_url: string,
       wallet_address: string,
       score: number
     } = { 
       custom_url: custom_url,
+      campaign_url: campaign_url,
       wallet_address: wallet_address,
       score: score
     }
@@ -25,6 +28,7 @@ export class Leaderboards extends Base {
   //order by: referrals and score
   queryLeaderboard(
     custom_url: string,
+    campaign_url: string,
     order_by: string,
     page_size: number,
     page: number,
@@ -36,31 +40,36 @@ export class Leaderboards extends Base {
 
     var params:{
       custom_url: string,
+      campaign_url: string,
       order_by: string,
       page_size: number,
       page: number,
       with_points_only: boolean
     } = { 
       custom_url: custom_url,
+      campaign_url: campaign_url,
       order_by: order_by,
       page_size: page_size,
       page: page,
       with_points_only: with_points_only
     }
 
-    return this.getRequest(`/external/leaderboard`,params);
+    return this.getRequest(`/external/leaderboard/users`,params);
   }
   
   myScore(
     custom_url: string,
+    campaign_url: string,
     wallet_address: string
   ): Promise<number> {
 
     var params:{
       custom_url: string,
+      campaign_url: string,
       wallet_address: string
     } = { 
       custom_url: custom_url,
+      campaign_url: campaign_url,
       wallet_address: wallet_address
     }
 

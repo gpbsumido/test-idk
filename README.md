@@ -62,8 +62,6 @@ Response: N/A
 ```ts
 import Refmint from "refmint-sdk"
 
-//Log Referral Example:
-
 const custom_url = 'refmintsdk'; //example project on testnet
 const link_id = 'fqOm45Jv'; //example link id for an affiliate on the example project
 const api_key = 'reYam27iBtMqeGuEhR2ywSV6440wo3gx2CcIC5IK6RNHRCvBoKAHdsNx3FyLz2t1'; //demo api key for testnet
@@ -91,8 +89,6 @@ Response: boolean
 
 ```ts
 import Refmint from "refmint-sdk"
-
-//Log Referral Example:
 
 const custom_url = "refmintsdk";
 const wallet_address = "0xE7bb679Fa033517393001e1E43b3d326016E0A0c";
@@ -136,8 +132,6 @@ Response:<br />
 ```ts
 import Refmint from "refmint-sdk"
 
-//Log Referral Example:
-
 const custom_url = "refmintsdk";
 const wallet_address = "0xE7bb679Fa033517393001e1E43b3d326016E0A0c";
 
@@ -173,6 +167,7 @@ Modify Score Example:
 
 Arguments:<br />
 &emsp;custom_url: string // Custom URL of your project<br />
+&emsp;campaign_url: string // Custom URL of your campaign<br />
 &emsp;wallet_adress: string // wallet_adress of the user whose score we want to add to<br />
 &emsp;score: number // how much to add to user score<br />
 
@@ -182,6 +177,7 @@ Response: N/A
 import Refmint from "refmint-sdk"
 
 const custom_url = 'refmintsdk'; // custom url for the project
+const campaign_url = 'campaignURL'; // custom url for the project
 const wallet_adress = '0x123abc456def'; // wallet address for the user
 const score = 10; // add 10 to the user's score
 
@@ -190,7 +186,7 @@ var refmintClient = new Refmint({
 	baseUrl: "https://test.refmint.xyz"
 });
 
-refmintClient.modifyScore(custom_url,wallet_adress,score).then((resp) => {
+refmintClient.modifyScore(custom_url,campaign_url,wallet_adress,score).then((resp) => {
 	//do something...
 }).catch(e => {
 	console.log(e);
@@ -202,6 +198,7 @@ Query Leaderboard Example:
 
 Arguments:<br />
 &emsp;custom_url: string // Custom URL of your project<br />
+&emsp;campaign_url: string // Custom URL of your campaign<br />
 &emsp;order_by: string // what to sort leaderboard by 'score' or referral<br />
 &emsp;page_size: number // how many users to include in query result<br />
 &emsp;page: number // which page of users to return, ie set to page to 2 and page size to 1o if you want users 11-20<br />
@@ -228,6 +225,7 @@ An array of objects:<br />
 import Refmint from "refmint-sdk"
 
 const custom_url = 'refmintsdk'; //example project on testnet
+const campaign_url = 'campaignURL'; //example campaign on testnet
 const order_by = 'score'; // order the leaderboard by highgest score
 const page_size = 10; // include 10 users in this request
 const page = 1; // get the first (page_size) users , i.e. users 1-10 in this case with the top score
@@ -238,7 +236,7 @@ var refmintClient = new Refmint({
 	baseUrl: "https://test.refmint.xyz"
 });
 
-refmintClient.queryLeaderboard(custom_url,order_by,page_size,page,with_points_only).then((resp) => {
+refmintClient.queryLeaderboard(custom_url,campaign_url,order_by,page_size,page,with_points_only).then((resp) => {
 	//do something...
 }).catch(e => {
 	console.log(e);
@@ -251,24 +249,16 @@ My Score Example:
 
 Arguments:<br />
 &emsp;custom_url: string // Custom URL of your project<br />
+&emsp;campaign_url: string // Custom URL of your campaign<br />
 &emsp;wallet_address: string // the wallet address of the user to check for a score<br />
 
-Response:<br />
-An Object:<br />
-&emsp;{<br />
-&emsp;&emsp;created_at: number, // date this user object for the leaderboard was created <br />
-&emsp;&emsp;project_id: string, // unique ID for the project<br />
-&emsp;&emsp;referral: number, // number of referrals by the user for the project<br />
-&emsp;&emsp;score: number, // the user's score for the project<br />
-&emsp;&emsp;updated_at: number, // the date the user was last updated<br />
-&emsp;&emsp;wallet_address: string, // the user's wallet address<br />
-&emsp;&emsp;_id_: string, // the user's unique id for the project<br />
-&emsp;}<br />
+Response: A number
 
 ```ts
 import Refmint from "refmint-sdk"
 
 const custom_url = 'refmintsdk'; //example project on testnet
+const campaign_url = 'myCampaignURL'; // order the leaderboard by highgest score
 const wallet_address = '0x123abc456def'; // order the leaderboard by highgest score
 
 var refmintClient = new Refmint({
@@ -276,7 +266,7 @@ var refmintClient = new Refmint({
 	baseUrl: "https://test.refmint.xyz"
 });
 
-refmintClient.myScore(custom_url,wallet_address).then((resp) => {
+refmintClient.myScore(custom_url,campaign_url,wallet_address).then((resp) => {
 	//do something...
 }).catch(e => {
 	console.log(e);
