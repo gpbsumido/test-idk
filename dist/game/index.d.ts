@@ -18,10 +18,10 @@ export declare class Game extends Base {
         referral: string;
     }>;
     modifyScore(project_url: string, campaign_url: string, wallet_address: string, score: number): Promise<void>;
-    addUsers(project_url: string, campaign_url: string, wallet_addressess: string[], link_id?: string): Promise<{
-        wallet_address: string;
+    addUsers(project_url: string, campaign_url: string, wallet_addresses: string[], link_id?: string): Promise<{
+        wallet_addresses: string;
         referral_link: string;
         referral_id: string;
     }[]>;
-    referral(project_url: string, campaign_url: string, wallet_address: string): Promise<void>;
+    referral(project_url: string, campaign_url: string, wallet_address: string, referral_only: boolean): Promise<void>;
 }

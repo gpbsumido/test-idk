@@ -89,24 +89,24 @@ export function ApiForm() {
     });
   }
 
-  async function isUser() {
+  // async function isUser() {
 
-    var refmintCaller = new Refmint({
-      apiKey: api_key,
-      baseUrl: base_url !== '' ? base_url : 'https://test.refmint.xyz'
-    });
+  //   var refmintCaller = new Refmint({
+  //     apiKey: api_key,
+  //     baseUrl: base_url !== '' ? base_url : 'https://test.refmint.xyz'
+  //   });
     
-    refmintCaller.isUser(
-      custom_url,
-      wallet_address
-    ).then((resp) => {
-      if (!resp) set_sdk_response('API failed.')
-      set_sdk_response(JSON.stringify(resp));
-    }).catch(e => {
-      console.log(e);
-      set_sdk_response(e.message)
-    });
-  }
+  //   refmintCaller.isUser(
+  //     custom_url,
+  //     wallet_address
+  //   ).then((resp) => {
+  //     if (!resp) set_sdk_response('API failed.')
+  //     set_sdk_response(JSON.stringify(resp));
+  //   }).catch(e => {
+  //     console.log(e);
+  //     set_sdk_response(e.message)
+  //   });
+  // }
 
   const [custom_url,set_custom_url] = useState<string>('refmintsdk');
   const [wallet_address,set_wallet_address] = useState<string>('');
@@ -210,7 +210,7 @@ export function ApiForm() {
         </button>
         <button
           className='w-min px-3 mt-5 bg-referralMintColor rounded-lg whitespace-nowrap'
-          onClick={()=>isUser()}
+          onClick={()=>affiliateLink()}
         >
           Affiliate Link
         </button>

@@ -140,10 +140,10 @@ export class Game extends Base {
   addUsers(
     project_url: string,
     campaign_url: string,
-    wallet_addressess: string[],
+    wallet_addresses: string[],
     link_id?: string
   ): Promise<{
-    wallet_address: string,
+    wallet_addresses: string,
     referral_link: string,
     referral_id: string
   }[]> {
@@ -151,12 +151,12 @@ export class Game extends Base {
     var params:{
       project_url: string,
       campaign_url: string,
-      wallet_addressess: string[],
+      wallet_addresses: string[],
       link_id?: string
     } = { 
       project_url: project_url,
       campaign_url: campaign_url,
-      wallet_addressess: wallet_addressess
+      wallet_addresses: wallet_addresses
     }
 
     if (link_id) params.link_id = link_id;
@@ -167,17 +167,20 @@ export class Game extends Base {
   referral(
     project_url: string,
     campaign_url: string,
-    wallet_address: string
+    wallet_address: string,
+    referral_only: boolean
   ): Promise<void> {
 
     var params:{
       project_url: string,
       campaign_url: string,
-      wallet_address: string
+      wallet_address: string,
+      referral_only: boolean
     } = { 
       project_url: project_url,
       campaign_url: campaign_url,
-      wallet_address: wallet_address
+      wallet_address: wallet_address,
+      referral_only: referral_only
     }
 
     return this.postRequest(`/sdk/game/campaign/referral`,params);

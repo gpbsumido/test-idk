@@ -60,21 +60,22 @@ class Game extends base_1.Base {
         };
         return this.postRequest(`/sdk/game/campaign/modify-score`, params);
     }
-    addUsers(project_url, campaign_url, wallet_addressess, link_id) {
+    addUsers(project_url, campaign_url, wallet_addresses, link_id) {
         var params = {
             project_url: project_url,
             campaign_url: campaign_url,
-            wallet_addressess: wallet_addressess
+            wallet_addresses: wallet_addresses
         };
         if (link_id)
             params.link_id = link_id;
         return this.postRequest(`/sdk/game/campaign/add-users`, params);
     }
-    referral(project_url, campaign_url, wallet_address) {
+    referral(project_url, campaign_url, wallet_address, referral_only) {
         var params = {
             project_url: project_url,
             campaign_url: campaign_url,
-            wallet_address: wallet_address
+            wallet_address: wallet_address,
+            referral_only: referral_only
         };
         return this.postRequest(`/sdk/game/campaign/referral`, params);
     }
