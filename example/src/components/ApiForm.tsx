@@ -89,6 +89,25 @@ export function ApiForm() {
     });
   }
 
+  // async function isUser() {
+
+  //   var refmintCaller = new Refmint({
+  //     apiKey: api_key,
+  //     baseUrl: base_url !== '' ? base_url : 'https://test.refmint.xyz'
+  //   });
+    
+  //   refmintCaller.isUser(
+  //     custom_url,
+  //     wallet_address
+  //   ).then((resp) => {
+  //     if (!resp) set_sdk_response('API failed.')
+  //     set_sdk_response(JSON.stringify(resp));
+  //   }).catch(e => {
+  //     console.log(e);
+  //     set_sdk_response(e.message)
+  //   });
+  // }
+
   const [custom_url,set_custom_url] = useState<string>('refmintsdk');
   const [wallet_address,set_wallet_address] = useState<string>('');
   const [link_id,set_link_id] = useState<string>(new_referral_link ? new_referral_link : 'fqOm45Jv');

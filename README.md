@@ -62,8 +62,6 @@ Response: N/A
 ```ts
 import Refmint from "refmint-sdk"
 
-//Log Referral Example:
-
 const custom_url = 'refmintsdk'; //example project on testnet
 const link_id = 'fqOm45Jv'; //example link id for an affiliate on the example project
 const api_key = 'reYam27iBtMqeGuEhR2ywSV6440wo3gx2CcIC5IK6RNHRCvBoKAHdsNx3FyLz2t1'; //demo api key for testnet
@@ -91,8 +89,6 @@ Response: boolean
 
 ```ts
 import Refmint from "refmint-sdk"
-
-//Log Referral Example:
 
 const custom_url = "refmintsdk";
 const wallet_address = "0xE7bb679Fa033517393001e1E43b3d326016E0A0c";
@@ -136,8 +132,6 @@ Response:<br />
 ```ts
 import Refmint from "refmint-sdk"
 
-//Log Referral Example:
-
 const custom_url = "refmintsdk";
 const wallet_address = "0xE7bb679Fa033517393001e1E43b3d326016E0A0c";
 
@@ -172,7 +166,8 @@ refmintClient.affiliateLink(
 Modify Score Example:
 
 Arguments:<br />
-&emsp;custom_url: string // Custom URL of your project<br />
+&emsp;project_url: string // Custom URL of your project<br />
+&emsp;campaign_url: string // Custom URL of your campaign<br />
 &emsp;wallet_adress: string // wallet_adress of the user whose score we want to add to<br />
 &emsp;score: number // how much to add to user score<br />
 
@@ -181,7 +176,8 @@ Response: N/A
 ```ts
 import Refmint from "refmint-sdk"
 
-const custom_url = 'refmintsdk'; // custom url for the project
+const project_url = 'refmintsdk'; // custom url for the project
+const campaign_url = 'campaignURL'; // custom url for the project
 const wallet_adress = '0x123abc456def'; // wallet address for the user
 const score = 10; // add 10 to the user's score
 
@@ -190,7 +186,7 @@ var refmintClient = new Refmint({
 	baseUrl: "https://test.refmint.xyz"
 });
 
-refmintClient.modifyScore(custom_url,wallet_adress,score).then((resp) => {
+refmintClient.modifyScore(custom_url,campaign_url,wallet_adress,score).then((resp) => {
 	//do something...
 }).catch(e => {
 	console.log(e);
@@ -201,7 +197,8 @@ refmintClient.modifyScore(custom_url,wallet_adress,score).then((resp) => {
 Query Leaderboard Example:
 
 Arguments:<br />
-&emsp;custom_url: string // Custom URL of your project<br />
+&emsp;project_url: string // Custom URL of your project<br />
+&emsp;campaign_url: string // Custom URL of your campaign<br />
 &emsp;order_by: string // what to sort leaderboard by 'score' or referral<br />
 &emsp;page_size: number // how many users to include in query result<br />
 &emsp;page: number // which page of users to return, ie set to page to 2 and page size to 1o if you want users 11-20<br />
@@ -227,7 +224,8 @@ An array of objects:<br />
 ```ts
 import Refmint from "refmint-sdk"
 
-const custom_url = 'refmintsdk'; //example project on testnet
+const project_url = 'refmintsdk'; //example project on testnet
+const campaign_url = 'campaignURL'; //example campaign on testnet
 const order_by = 'score'; // order the leaderboard by highgest score
 const page_size = 10; // include 10 users in this request
 const page = 1; // get the first (page_size) users , i.e. users 1-10 in this case with the top score
@@ -238,7 +236,7 @@ var refmintClient = new Refmint({
 	baseUrl: "https://test.refmint.xyz"
 });
 
-refmintClient.queryLeaderboard(custom_url,order_by,page_size,page,with_points_only).then((resp) => {
+refmintClient.leaderboard(project_url,campaign_url,order_by,page_size,page,with_points_only).then((resp) => {
 	//do something...
 }).catch(e => {
 	console.log(e);
@@ -247,36 +245,200 @@ refmintClient.queryLeaderboard(custom_url,order_by,page_size,page,with_points_on
 ```
 
 
-My Score Example:
+User Score Example:
 
 Arguments:<br />
-&emsp;custom_url: string // Custom URL of your project<br />
+&emsp;project_url: string // Custom URL of your project<br />
+&emsp;campaign_url: string // Custom URL of your campaign<br />
 &emsp;wallet_address: string // the wallet address of the user to check for a score<br />
 
-Response:<br />
-An Object:<br />
-&emsp;{<br />
-&emsp;&emsp;created_at: number, // date this user object for the leaderboard was created <br />
-&emsp;&emsp;project_id: string, // unique ID for the project<br />
-&emsp;&emsp;referral: number, // number of referrals by the user for the project<br />
-&emsp;&emsp;score: number, // the user's score for the project<br />
-&emsp;&emsp;updated_at: number, // the date the user was last updated<br />
-&emsp;&emsp;wallet_address: string, // the user's wallet address<br />
-&emsp;&emsp;_id_: string, // the user's unique id for the project<br />
-&emsp;}<br />
+Response:
+{<br />
+&emsp;project_url: string, // custom_url of the project <br />
+&emsp;campaign_url: string, // custom_url of the campaign<br />
+&emsp;wallet_address: string, // wallet_address of user<br />
+}<br />
 
 ```ts
 import Refmint from "refmint-sdk"
 
 const custom_url = 'refmintsdk'; //example project on testnet
-const wallet_address = '0x123abc456def'; // order the leaderboard by highgest score
+const campaign_url = 'myCampaignURL'; // example campaign in the project
+const wallet_address = '0x123abc456def'; // example wallet_address
 
 var refmintClient = new Refmint({
 	apiKey: api_key,
 	baseUrl: "https://test.refmint.xyz"
 });
 
-refmintClient.myScore(custom_url,wallet_address).then((resp) => {
+refmintClient.userScore(custom_url,campaign_url,wallet_address).then((resp) => {
+	//do something...
+}).catch(e => {
+	console.log(e);
+});
+
+```
+
+
+Add Users Example:
+
+Arguments:<br />
+&emsp;project_url: string // Custom URL of your project<br />
+&emsp;campaign_url: string // Custom URL of your campaign<br />
+&emsp;wallet_addresses: string[] // array of strings of the wallet_addressses of the users to add<br />
+&emsp;link_id?: string // optional, whether or not to attribute a referral, insert the link_id of the referrer<br />
+
+Response:
+
+An array of objects:<br />
+[<br />
+&emsp;{<br />
+&emsp;&emsp;wallet_address: string // wallet_address of the referred user<br />
+&emsp;&emsp;referral_link: string // referral link for new user for the campaign<br />
+&emsp;&emsp;referral_id: string // added user's referral id<br />
+&emsp;}<br />
+&emsp;,{<br />
+&emsp;&emsp;...<br />
+&emsp;}<br />
+]
+
+```ts
+import Refmint from "refmint-sdk"
+
+const custom_url = 'refmintsdk'; //example project on testnet
+const campaign_url = 'myCampaignURL'; // example campaign
+const wallet_addresses = ['0x123abc456def']; // example wallet_address to be added to campaign
+const link_id = 'fqOm45Jv'; // optional, example link_id of the referrer
+
+var refmintClient = new Refmint({
+	apiKey: api_key,
+	baseUrl: "https://test.refmint.xyz"
+});
+
+refmintClient.addUsers(custom_url,campaign_url,wallet_addresses,link_id).then((resp) => {
+	//do something...
+}).catch(e => {
+	console.log(e);
+});
+
+```
+
+
+Referral Example:
+
+Arguments:<br />
+&emsp;project_url: string // Custom URL of your project<br />
+&emsp;campaign_url: string // Custom URL of your campaign<br />
+&emsp;wallet_address: string // the wallet address of the user to add a referral to<br />
+&emsp;referral_only: boolean // true if only to count referral, false if you want to add points as well (based on campaign points_per_referral)<br />
+
+Response: N/A
+
+```ts
+import Refmint from "refmint-sdk"
+
+const project_url = 'refmintsdk'; //example project on testnet
+const campaign_url = 'myCampaignURL'; // example campaign
+const wallet_address = '0x123abc456def'; // example wallet_address to add referral to
+const referral_only = true; // only add referral (or false to add points as well)
+
+var refmintClient = new Refmint({
+	apiKey: api_key,
+	baseUrl: "https://test.refmint.xyz"
+});
+
+refmintClient.referral(project_url,campaign_url,wallet_address,referral_only).then((resp) => {
+	//do something...
+}).catch(e => {
+	console.log(e);
+});
+
+```
+
+
+Is User Example:
+
+Arguments:<br />
+&emsp;custom_url: string // Custom URL of your project<br />
+&emsp;wallet_address: string // wallet addresses to check if user of project<br />
+
+Response: boolean
+
+```ts
+import Refmint from "refmint-sdk"
+
+const custom_url = 'refmintsdk'; //example project on testnet
+const wallet_address = '0x123abc456def'; //wallet address to check
+
+
+var refmintClient = new Refmint({
+	apiKey: api_key,
+	baseUrl: "https://test.refmint.xyz"
+});
+
+refmintClient.isUser(custom_url,wallet_address).then((resp) => {
+	//do something...
+}).catch(e => {
+	console.log(e);
+});
+
+```
+
+
+User Links Example:
+
+Arguments:<br />
+&emsp;custom_url: string // Custom URL of your project<br />
+&emsp;wallet_address: string // wallet addresses to grab links for<br />
+
+Response: Object<br />
+{
+&emsp;referral_link: string // referral link to the project<br />
+&emsp;referral_id: string // referral_id of the user<br />
+}
+
+```ts
+import Refmint from "refmint-sdk"
+
+const custom_url = 'refmintsdk'; //example project on testnet
+const wallet_address = '0x123abc456def'; //wallet address to check
+
+
+var refmintClient = new Refmint({
+	apiKey: api_key,
+	baseUrl: "https://test.refmint.xyz"
+});
+
+refmintClient.userLinks(custom_url,wallet_address).then((resp) => {
+	//do something...
+}).catch(e => {
+	console.log(e);
+});
+
+```
+
+
+Click Example:
+
+Arguments:<br />
+&emsp;custom_url: string // Custom URL of your project<br />
+&emsp;link_id?: string // optional, user's link id to attribute click to<br />
+
+Response: N/A
+
+```ts
+import Refmint from "refmint-sdk"
+
+const custom_url = 'refmintsdk'; //example project on testnet
+const link_id? = 'fqOm45Jv'; // optional, example link_id of the referrer
+
+
+var refmintClient = new Refmint({
+	apiKey: api_key,
+	baseUrl: "https://test.refmint.xyz"
+});
+
+refmintClient.click(custom_url,link_id).then((resp) => {
 	//do something...
 }).catch(e => {
 	console.log(e);

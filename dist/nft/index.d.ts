@@ -1,5 +1,5 @@
 import { Base } from "../base";
-export declare class Project extends Base {
+export declare class NFT extends Base {
     logView(custom_url: string, link_id?: string): Promise<string | null>;
     logReferral(custom_url: string, wallet_address: string, link_id?: string, email?: string, phone?: string, twitter?: string, discord?: string): Promise<{
         referral_link: string;

@@ -1,6 +1,6 @@
 {
   "name": "refmint-example",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "private": true,
   "dependencies": {
     "@tailwindcss/line-clamp": "^0.4.2",
@@ -17,7 +17,7 @@
     "react-router-dom": "^6.4.1",
     "react-scripts": "5.0.1",
     "react-tooltip": "^4.2.21",
-    "refmint-sdk": "^1.1.8",
+    "refmint-sdk": "^1.1.14",
     "typescript": "^4.8.4",
     "web-vitals": "^2.1.4"
   },

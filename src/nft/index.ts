@@ -1,11 +1,11 @@
 import { Base } from "../base";
 
-export class Project extends Base {
+export class NFT extends Base {
   
   logView(
     custom_url:string,
     link_id?:string
-  ): Promise<{referral_link: string, referral_id:string}> {
+  ): Promise<string|null> {
 
     var params:{
       custom_url:string,
@@ -15,7 +15,7 @@ export class Project extends Base {
     }
     if (link_id) params.link_id = link_id;
 
-    return this.postRequest(`/external/view`,params);
+    return this.postRequest(`/sdk/nft/view`,params);
   }
 
   logReferral(
@@ -46,7 +46,7 @@ export class Project extends Base {
     if (twitter) params.twitter = twitter;
     if (discord) params.discord = discord;
 
-    return this.postRequest(`/external/referral`,params);
+    return this.postRequest(`/sdk/nft/referral`,params);
   }
 
   isAffiliate(
@@ -62,7 +62,7 @@ export class Project extends Base {
       wallet_address: wallet_address
     }
 
-    return this.getRequest(`/external/is-affiliate`,params);
+    return this.getRequest(`/sdk/nft/is-affiliate`,params);
   }
 
   affiliateLink(
@@ -78,7 +78,7 @@ export class Project extends Base {
       wallet_address: wallet_address
     }
 
-    return this.getRequest(`/external/affiliate`,params);
+    return this.getRequest(`/sdk/nft/affiliate`,params);
   }
   
 }
