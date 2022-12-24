@@ -140,10 +140,14 @@ export class Game extends Base {
   addUsers(
     project_url: string,
     campaign_url: string,
-    wallet_addresses: string[],
+    users: {
+      wallet_address: string,
+      score: number,
+      referral: number
+    }[],
     link_id?: string
   ): Promise<{
-    wallet_addresses: string,
+    wallet_address: string,
     referral_link: string,
     referral_id: string
   }[]> {
@@ -151,12 +155,16 @@ export class Game extends Base {
     var params:{
       project_url: string,
       campaign_url: string,
-      wallet_addresses: string[],
+      users: {
+        wallet_address: string,
+        score: number,
+        referral: number
+      }[],
       link_id?: string
     } = { 
       project_url: project_url,
       campaign_url: campaign_url,
-      wallet_addresses: wallet_addresses
+      users: users
     }
 
     if (link_id) params.link_id = link_id;
