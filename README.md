@@ -285,12 +285,12 @@ Add Users Example:
 Arguments:<br />
 &emsp;project_url: string // Custom URL of your project<br />
 &emsp;campaign_url: string // Custom URL of your campaign<br />
-&emsp;wallet_addresses: string[] // array of strings of the wallet_addressses of the users to add<br />
+&emsp;users: { wallet_address: string, score: number, referral: number }[] // array of objects (object is a user object with a wallet_addres, the score, and referrals total)<br />
 &emsp;link_id?: string // optional, whether or not to attribute a referral, insert the link_id of the referrer<br />
 
 Response:
 
-An array of objects:<br />
+An array of user objects:<br />
 [<br />
 &emsp;{<br />
 &emsp;&emsp;wallet_address: string // wallet_address of the referred user<br />
@@ -307,7 +307,7 @@ import Refmint from "refmint-sdk"
 
 const custom_url = 'refmintsdk'; //example project on testnet
 const campaign_url = 'myCampaignURL'; // example campaign
-const wallet_addresses = ['0x123abc456def']; // example wallet_address to be added to campaign
+const users = [{wallet_address:'0x123abc456def', score: 0, referral: 0}]; // example user to be added
 const link_id = 'fqOm45Jv'; // optional, example link_id of the referrer
 
 var refmintClient = new Refmint({
@@ -315,7 +315,7 @@ var refmintClient = new Refmint({
 	baseUrl: "https://test.refmint.xyz"
 });
 
-refmintClient.addUsers(custom_url,campaign_url,wallet_addresses,link_id).then((resp) => {
+refmintClient.addUsers(custom_url,campaign_url,users,link_id).then((resp) => {
 	//do something...
 }).catch(e => {
 	console.log(e);
