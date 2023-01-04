@@ -89,18 +89,24 @@ export function ApiForm() {
     });
   }
 
-  // async function isUser() {
+  // async function trys() {
 
   //   var refmintCaller = new Refmint({
   //     apiKey: api_key,
   //     baseUrl: base_url !== '' ? base_url : 'https://test.refmint.xyz'
   //   });
     
-  //   refmintCaller.isUser(
-  //     custom_url,
-  //     wallet_address
+  //   refmintCaller.modifyScore(
+  //     '3verse',
+  //     'score',
+  //     [
+  //       {
+  //         wallet_address: wallet_address,
+  //         score: 10
+  //       }
+  //     ]
   //   ).then((resp) => {
-  //     if (!resp) set_sdk_response('API failed.')
+  //     // if (!resp) set_sdk_response('API failed.')
   //     set_sdk_response(JSON.stringify(resp));
   //   }).catch(e => {
   //     console.log(e);

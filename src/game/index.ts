@@ -118,20 +118,23 @@ export class Game extends Base {
   modifyScore(
     project_url: string,
     campaign_url: string,
-    wallet_address: string,
-    score: number
+    users: {
+      wallet_address: string,
+      score: number
+    }[]
   ): Promise<void> {
 
     var params:{
       project_url: string,
       campaign_url: string,
-      wallet_address: string,
-      score: number //score is added/subtracted, not set as a value
+      users: {
+        wallet_address: string,
+        score: number //score is added/subtracted, not set as a value
+      }[]
     } = { 
       project_url: project_url,
       campaign_url: campaign_url,
-      wallet_address: wallet_address,
-      score: score
+      users: users
     }
 
     return this.postRequest(`/sdk/game/campaign/modify-score`,params);
