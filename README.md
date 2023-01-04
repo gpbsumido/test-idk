@@ -168,8 +168,10 @@ Modify Score Example:
 Arguments:<br />
 &emsp;project_url: string // Custom URL of your project<br />
 &emsp;campaign_url: string // Custom URL of your campaign<br />
-&emsp;wallet_adress: string // wallet_adress of the user whose score we want to add to<br />
-&emsp;score: number // how much to add to user score<br />
+&emsp;users: {
+&emsp;&emsp;wallet_adress: string // wallet_adress of the user whose score we want to add to<br />
+&emsp;&emsp;score: number // how much to add to be added/subtracted to user score<br />
+&emsp;}[] // array of objects which has a wallet address and score to be added/subtracted to user score<br />
 
 Response: N/A
 
@@ -178,15 +180,23 @@ import Refmint from "refmint-sdk"
 
 const project_url = 'refmintsdk'; // custom url for the project
 const campaign_url = 'campaignURL'; // custom url for the project
-const wallet_adress = '0x123abc456def'; // wallet address for the user
-const score = 10; // add 10 to the user's score
+const users = [
+  {
+    wallet_address: '0x123abc456def',
+    score: 10
+  },
+  {
+    wallet_address: '0xabc123def456',
+    score: -3
+  },
+];
 
 var refmintClient = new Refmint({
 	apiKey: api_key,
 	baseUrl: "https://test.refmint.xyz"
 });
 
-refmintClient.modifyScore(custom_url,campaign_url,wallet_adress,score).then((resp) => {
+refmintClient.modifyScore(custom_url,campaign_url,users).then((resp) => {
 	//do something...
 }).catch(e => {
 	console.log(e);

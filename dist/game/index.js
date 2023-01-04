@@ -51,12 +51,11 @@ class Game extends base_1.Base {
         };
         return this.getRequest(`/sdk/game/campaign/user-score`, params);
     }
-    modifyScore(project_url, campaign_url, wallet_address, score) {
+    modifyScore(project_url, campaign_url, users) {
         var params = {
             project_url: project_url,
             campaign_url: campaign_url,
-            wallet_address: wallet_address,
-            score: score
+            users: users
         };
         return this.postRequest(`/sdk/game/campaign/modify-score`, params);
     }
