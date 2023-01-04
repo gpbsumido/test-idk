@@ -92,8 +92,8 @@ export function ApiForm() {
   // async function trys() {
 
   //   var refmintCaller = new Refmint({
-  //     apiKey: 'v8uESVxMDfTgdZ7YGNiz76u9GuZn1c8hFGG6GxkqsW5F3J1vRdpe9Md41HV6EDPj',
-  //     baseUrl: 'http://localhost:3000'
+  //     apiKey: api_key,
+  //     baseUrl: base_url !== '' ? base_url : 'https://test.refmint.xyz'
   //   });
     
   //   refmintCaller.modifyScore(
