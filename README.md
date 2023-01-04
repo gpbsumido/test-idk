@@ -168,7 +168,7 @@ Modify Score Example:
 Arguments:<br />
 &emsp;project_url: string // Custom URL of your project<br />
 &emsp;campaign_url: string // Custom URL of your campaign<br />
-&emsp;users: {
+&emsp;users: {<br />
 &emsp;&emsp;wallet_adress: string // wallet_adress of the user whose score we want to add to<br />
 &emsp;&emsp;score: number // how much to add to be added/subtracted to user score<br />
 &emsp;}[] // array of objects which has a wallet address and score to be added/subtracted to user score<br />
