@@ -5,6 +5,26 @@ SDK for use with https://app.refmint.xyz or https://test.refmint.xyz
 The Refmint SDK is for developers to be able to make API calls to the Refmint app server and testnet server.
 The following pages will describe how to make calls to the Refmint API. Developers will need to install the refmint-sdk to their project. This can be done using npm or by cloning the github project.
 
+Update Note: As of v.1.1.18, there is now an enum for baseUrl when initializing the Refmint client. Previously, one had to pass the baseUrl endpoint string (i.e. 'https://testnet.refmint.xyz'). Now, instead of passing the base url, you must import the BaseURLOptions enum from refmint-sdk as show in the examples below. This enum has options of LOCAL, TESTNET (equivalent of https://test.refmint.xyz), and MAINNET (equivalent of https://app.refmint.xyz). Pass the enum value as shown in the examples below:
+
+I.E.
+
+Previously: 
+
+var refmintClient = new Refmint({
+&emsp;apiKey: api_key,<br />
+&emsp;baseUrl: "https://test.refmint.xyz"<br />
+});
+
+Is now:
+
+var refmintClient = new Refmint({
+&emsp;apiKey: api_key,<br />
+&emsp;baseUrl: BaseURLOptions.TESTNET<br />
+});
+
+
+
 ```ts
 npm i refmint-sdk
 ```
@@ -29,6 +49,7 @@ Response:<br />
 
 ```ts
 import Refmint from "refmint-sdk"
+import { BaseURLOptions } from "refmint-sdk"
 
 const custom_url = 'refmintsdk'; //example project on testnet
 const wallet_adress = '0x123abc456def'; //insert wallet of referree here
@@ -39,7 +60,7 @@ const api_key = 'reYam27iBtMqeGuEhR2ywSV6440wo3gx2CcIC5IK6RNHRCvBoKAHdsNx3FyLz2t
 
 var refmintClient = new Refmint({
 	apiKey: api_key,
-	baseUrl: "https://test.refmint.xyz"
+	baseUrl: BaseURLOptions.TESTNET
 });
 
 refmintClient.logReferral(custom_url,wallet_adress,link_id,email_address,phone_number).then((resp) => {
@@ -61,6 +82,7 @@ Response: N/A
 
 ```ts
 import Refmint from "refmint-sdk"
+import { BaseURLOptions } from "refmint-sdk"
 
 const custom_url = 'refmintsdk'; //example project on testnet
 const link_id = 'fqOm45Jv'; //example link id for an affiliate on the example project
@@ -68,7 +90,7 @@ const api_key = 'reYam27iBtMqeGuEhR2ywSV6440wo3gx2CcIC5IK6RNHRCvBoKAHdsNx3FyLz2t
 
 var refmintClient = new Refmint({
 	apiKey: api_key,
-	baseUrl: "https://test.refmint.xyz"
+	baseUrl: BaseURLOptions.TESTNET
 });
 
 refmintClient.logView(custom_url,link_id).then((resp) => {
@@ -89,9 +111,15 @@ Response: boolean
 
 ```ts
 import Refmint from "refmint-sdk"
+import { BaseURLOptions } from "refmint-sdk"
 
 const custom_url = "refmintsdk";
 const wallet_address = "0xE7bb679Fa033517393001e1E43b3d326016E0A0c";
+
+var refmintClient = new Refmint({
+	apiKey: api_key,
+	baseUrl: BaseURLOptions.TESTNET
+});
 
 refmintClient.isAffiliate(
       custom_url,
@@ -131,9 +159,15 @@ Response:<br />
 
 ```ts
 import Refmint from "refmint-sdk"
+import { BaseURLOptions } from "refmint-sdk"
 
 const custom_url = "refmintsdk";
 const wallet_address = "0xE7bb679Fa033517393001e1E43b3d326016E0A0c";
+
+var refmintClient = new Refmint({
+	apiKey: api_key,
+	baseUrl: BaseURLOptions.TESTNET
+});
 
 refmintClient.affiliateLink(
       custom_url,
@@ -177,6 +211,7 @@ Response: N/A
 
 ```ts
 import Refmint from "refmint-sdk"
+import { BaseURLOptions } from "refmint-sdk"
 
 const project_url = 'refmintsdk'; // custom url for the project
 const campaign_url = 'campaignURL'; // custom url for the project
@@ -193,7 +228,7 @@ const users = [
 
 var refmintClient = new Refmint({
 	apiKey: api_key,
-	baseUrl: "https://test.refmint.xyz"
+	baseUrl: BaseURLOptions.TESTNET
 });
 
 refmintClient.modifyScore(custom_url,campaign_url,users).then((resp) => {
@@ -233,6 +268,7 @@ An array of objects:<br />
 
 ```ts
 import Refmint from "refmint-sdk"
+import { BaseURLOptions } from "refmint-sdk"
 
 const project_url = 'refmintsdk'; //example project on testnet
 const campaign_url = 'campaignURL'; //example campaign on testnet
@@ -243,7 +279,7 @@ const with_points_only = true; // only include users in the list of their score 
 
 var refmintClient = new Refmint({
 	apiKey: api_key,
-	baseUrl: "https://test.refmint.xyz"
+	baseUrl: BaseURLOptions.TESTNET
 });
 
 refmintClient.leaderboard(project_url,campaign_url,order_by,page_size,page,with_points_only).then((resp) => {
@@ -271,6 +307,7 @@ Response:
 
 ```ts
 import Refmint from "refmint-sdk"
+import { BaseURLOptions } from "refmint-sdk"
 
 const custom_url = 'refmintsdk'; //example project on testnet
 const campaign_url = 'myCampaignURL'; // example campaign in the project
@@ -278,7 +315,7 @@ const wallet_address = '0x123abc456def'; // example wallet_address
 
 var refmintClient = new Refmint({
 	apiKey: api_key,
-	baseUrl: "https://test.refmint.xyz"
+	baseUrl: BaseURLOptions.TESTNET
 });
 
 refmintClient.userScore(custom_url,campaign_url,wallet_address).then((resp) => {
@@ -314,6 +351,7 @@ An array of user objects:<br />
 
 ```ts
 import Refmint from "refmint-sdk"
+import { BaseURLOptions } from "refmint-sdk"
 
 const custom_url = 'refmintsdk'; //example project on testnet
 const campaign_url = 'myCampaignURL'; // example campaign
@@ -322,7 +360,7 @@ const link_id = 'fqOm45Jv'; // optional, example link_id of the referrer
 
 var refmintClient = new Refmint({
 	apiKey: api_key,
-	baseUrl: "https://test.refmint.xyz"
+	baseUrl: BaseURLOptions.TESTNET
 });
 
 refmintClient.addUsers(custom_url,campaign_url,users,link_id).then((resp) => {
@@ -346,6 +384,7 @@ Response: N/A
 
 ```ts
 import Refmint from "refmint-sdk"
+import { BaseURLOptions } from "refmint-sdk"
 
 const project_url = 'refmintsdk'; //example project on testnet
 const campaign_url = 'myCampaignURL'; // example campaign
@@ -354,7 +393,7 @@ const referral_only = true; // only add referral (or false to add points as well
 
 var refmintClient = new Refmint({
 	apiKey: api_key,
-	baseUrl: "https://test.refmint.xyz"
+	baseUrl: BaseURLOptions.TESTNET
 });
 
 refmintClient.referral(project_url,campaign_url,wallet_address,referral_only).then((resp) => {
@@ -376,6 +415,7 @@ Response: boolean
 
 ```ts
 import Refmint from "refmint-sdk"
+import { BaseURLOptions } from "refmint-sdk"
 
 const custom_url = 'refmintsdk'; //example project on testnet
 const wallet_address = '0x123abc456def'; //wallet address to check
@@ -383,7 +423,7 @@ const wallet_address = '0x123abc456def'; //wallet address to check
 
 var refmintClient = new Refmint({
 	apiKey: api_key,
-	baseUrl: "https://test.refmint.xyz"
+	baseUrl: BaseURLOptions.TESTNET
 });
 
 refmintClient.isUser(custom_url,wallet_address).then((resp) => {
@@ -409,6 +449,7 @@ Response: Object<br />
 
 ```ts
 import Refmint from "refmint-sdk"
+import { BaseURLOptions } from "refmint-sdk"
 
 const custom_url = 'refmintsdk'; //example project on testnet
 const wallet_address = '0x123abc456def'; //wallet address to check
@@ -416,7 +457,7 @@ const wallet_address = '0x123abc456def'; //wallet address to check
 
 var refmintClient = new Refmint({
 	apiKey: api_key,
-	baseUrl: "https://test.refmint.xyz"
+	baseUrl: BaseURLOptions.TESTNET
 });
 
 refmintClient.userLinks(custom_url,wallet_address).then((resp) => {
@@ -431,24 +472,27 @@ refmintClient.userLinks(custom_url,wallet_address).then((resp) => {
 Click Example:
 
 Arguments:<br />
-&emsp;custom_url: string // Custom URL of your project<br />
+&emsp;project_url: string // Custom URL of your project<br />
+&emsp;campaign_url: string // Custom URL of your campaign<br />
 &emsp;link_id?: string // optional, user's link id to attribute click to<br />
 
 Response: N/A
 
 ```ts
 import Refmint from "refmint-sdk"
+import { BaseURLOptions } from "refmint-sdk"
 
-const custom_url = 'refmintsdk'; //example project on testnet
+const project_url = 'refmintsdk'; //example project on testnet
+const campaign_url = 'campaign_1'; //example project on testnet
 const link_id? = 'fqOm45Jv'; // optional, example link_id of the referrer
 
 
 var refmintClient = new Refmint({
 	apiKey: api_key,
-	baseUrl: "https://test.refmint.xyz"
+	baseUrl: BaseURLOptions.TESTNET
 });
 
-refmintClient.click(custom_url,link_id).then((resp) => {
+refmintClient.click(project_url,campaign_url,link_id).then((resp) => {
 	//do something...
 }).catch(e => {
 	console.log(e);

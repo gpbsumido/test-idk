@@ -9,3 +9,9 @@ interface Refmint extends Game,NFT {}
 applyMixins(Refmint, [Game,NFT]);
 
 export default Refmint;
+
+export enum BaseURLOptions {
+  LOCAL,
+  TESTNET,
+  MAINNET,
+}

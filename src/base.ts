@@ -1,8 +1,9 @@
 import axios from "axios";
+import { BaseURLOptions } from "./index"
 
 type Config = {
   apiKey: string;
-  baseUrl?: string;
+  baseUrlOption?: BaseURLOptions;
 };
 
 export abstract class Base {
@@ -11,7 +12,18 @@ export abstract class Base {
 
   constructor(config: Config) {
     this.apiKey = config.apiKey;
-    this.baseUrl = config.baseUrl || "http://localhost:3000";
+    switch(config.baseUrlOption) {
+      case BaseURLOptions.LOCAL:
+        this.baseUrl = 'http://localhost:3000';
+        return;
+      case BaseURLOptions.MAINNET:
+        this.baseUrl = 'https://app.refmint.xyz'
+        return;
+      case BaseURLOptions.TESTNET:
+      default:
+        this.baseUrl = 'https://test.refmint.xyz'
+        return;
+    }
   }
 
   protected getRequest<T>(endpoint: string, options?: any): Promise<T> {
