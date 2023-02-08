@@ -472,7 +472,8 @@ refmintClient.userLinks(custom_url,wallet_address).then((resp) => {
 Click Example:
 
 Arguments:<br />
-&emsp;custom_url: string // Custom URL of your project<br />
+&emsp;project_url: string // Custom URL of your project<br />
+&emsp;campaign_url: string // Custom URL of your campaign<br />
 &emsp;link_id?: string // optional, user's link id to attribute click to<br />
 
 Response: N/A
@@ -481,7 +482,8 @@ Response: N/A
 import Refmint from "refmint-sdk"
 import { BaseURLOptions } from "refmint-sdk"
 
-const custom_url = 'refmintsdk'; //example project on testnet
+const project_url = 'refmintsdk'; //example project on testnet
+const campaign_url = 'campaign_1'; //example project on testnet
 const link_id? = 'fqOm45Jv'; // optional, example link_id of the referrer
 
 
@@ -490,7 +492,7 @@ var refmintClient = new Refmint({
 	baseUrl: BaseURLOptions.TESTNET
 });
 
-refmintClient.click(custom_url,link_id).then((resp) => {
+refmintClient.click(project_url,campaign_url,link_id).then((resp) => {
 	//do something...
 }).catch(e => {
 	console.log(e);
