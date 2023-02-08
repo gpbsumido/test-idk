@@ -1,6 +1,7 @@
+import { BaseURLOptions } from "./index";
 declare type Config = {
     apiKey: string;
-    baseUrl?: string;
+    baseUrlOption?: BaseURLOptions;
 };
 export declare abstract class Base {
     private apiKey;
