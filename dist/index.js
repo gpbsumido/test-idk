@@ -13,7 +13,6 @@ class NFTClient extends base_1.Base {
 }
 exports.NFTClient = NFTClient;
 (0, utils_1.applyMixins)(NFTClient, [nft_1.NFT]);
-exports.default = { GameClient, NFTClient };
 var BaseURLOptions;
 (function (BaseURLOptions) {
     BaseURLOptions[BaseURLOptions["LOCAL"] = 0] = "LOCAL";

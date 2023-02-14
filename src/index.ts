@@ -11,8 +11,6 @@ export class NFTClient extends Base {}
 export interface NFTClient extends NFT {}
 applyMixins(NFTClient, [NFT]);
 
-export default { GameClient, NFTClient }
-
 export enum BaseURLOptions {
   LOCAL,
   TESTNET,

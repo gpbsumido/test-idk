@@ -9,11 +9,6 @@ export declare class NFTClient extends Base {
 }
 export interface NFTClient extends NFT {
 }
-declare const _default: {
-    GameClient: typeof GameClient;
-    NFTClient: typeof NFTClient;
-};
-export default _default;
 export declare enum BaseURLOptions {
     LOCAL = 0,
     TESTNET = 1,
