@@ -1,11 +1,19 @@
 import { Base } from "./base";
 import { Game } from "./game";
 import { NFT } from "./nft";
-declare class Refmint extends Base {
+export declare class GameClient extends Base {
 }
-interface Refmint extends Game, NFT {
+export interface GameClient extends Game {
 }
-export default Refmint;
+export declare class NFTClient extends Base {
+}
+export interface NFTClient extends NFT {
+}
+declare const _default: {
+    GameClient: typeof GameClient;
+    NFTClient: typeof NFTClient;
+};
+export default _default;
 export declare enum BaseURLOptions {
     LOCAL = 0,
     TESTNET = 1,

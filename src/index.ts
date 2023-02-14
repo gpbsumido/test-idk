@@ -3,12 +3,15 @@ import { Game } from "./game";
 import { NFT } from "./nft";
 import { applyMixins } from "./utils";
 
-class Refmint extends Base {}
-interface Refmint extends Game,NFT {}
+export class GameClient extends Base {}
+export interface GameClient extends Game {}
+applyMixins(GameClient, [Game]);
 
-applyMixins(Refmint, [Game,NFT]);
+export class NFTClient extends Base {}
+export interface NFTClient extends NFT {}
+applyMixins(NFTClient, [NFT]);
 
-export default Refmint;
+export default { GameClient, NFTClient }
 
 export enum BaseURLOptions {
   LOCAL,
