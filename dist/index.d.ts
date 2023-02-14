@@ -1,17 +1,17 @@
 import { Base } from "./base";
 import { Game } from "./game";
 import { NFT } from "./nft";
-declare class GameClient extends Base {
+declare class GameInternal extends Base {
 }
-interface GameClient extends Game {
+interface GameInternal extends Game {
 }
-declare class NFTClient extends Base {
+declare class NFTInternal extends Base {
 }
-interface NFTClient extends NFT {
+interface NFTInternal extends NFT {
 }
 declare const _default: {
-    Game: typeof GameClient;
-    NFT: typeof NFTClient;
+    Game: typeof GameInternal;
+    NFT: typeof NFTInternal;
 };
 export default _default;
 export declare enum BaseURLOptions {
