@@ -11,9 +11,3 @@ export function applyMixins(derivedCtor: any, baseCtors: any[]) {
 }
 
 export const ORDER_BY_SELECTION = ['score','referral'];
-
-export enum BaseURLOptions {
-  LOCAL,
-  TESTNET,
-  MAINNET,
-}
