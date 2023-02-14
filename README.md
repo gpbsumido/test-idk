@@ -23,6 +23,22 @@ var refmintClient = new Refmint({
 &emsp;baseUrl: BaseURLOptions.TESTNET<br />
 });
 
+Update note: As of v.1.2.0, The Game and NFT project clients have been seperated. They are now seperate and can be initiated as below:
+
+
+var refmintClient = new Refmint.Game({
+&emsp;apiKey: api_key,<br />
+&emsp;baseUrl: BaseURLOptions.TESTNET<br />
+});
+
+OR 
+
+var refmintClient = new Refmint.NFT({
+&emsp;apiKey: api_key,<br />
+&emsp;baseUrl: BaseURLOptions.TESTNET<br />
+});
+
+####
 
 
 ```ts
