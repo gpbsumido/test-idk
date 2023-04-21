@@ -79,5 +79,15 @@ class Game extends base_1.Base {
         };
         return this.postRequest(`/sdk/game/campaign/referral`, params);
     }
+    triggerEvent(project_url, campaign_url, wallet_address, event_hash, data) {
+        var params = {
+            project_url: project_url,
+            campaign_url: campaign_url,
+            wallet_address: wallet_address,
+            event_hash: event_hash,
+            data: data
+        };
+        return this.postRequest(`/sdk/game/campaign/event`, params);
+    }
 }
 exports.Game = Game;

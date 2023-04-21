@@ -200,5 +200,29 @@ export class Game extends Base {
     return this.postRequest(`/sdk/game/campaign/referral`,params);
   }
 
+  triggerEvent(
+    project_url: string,
+    campaign_url: string,
+    wallet_address: string,
+    event_hash: string,
+    data: string
+  ): Promise<void> {
+
+    var params:{
+      project_url: string,
+      campaign_url: string,
+      wallet_address: string,
+      event_hash: string,
+      data: string
+    } = { 
+      project_url: project_url,
+      campaign_url: campaign_url,
+      wallet_address: wallet_address,
+      event_hash: event_hash,
+      data: data
+    }
+    
+    return this.postRequest(`/sdk/game/campaign/event`,params);
+  }
 
 }
