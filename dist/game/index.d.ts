@@ -31,4 +31,5 @@ export declare class Game extends Base {
         referral_id: string;
     }[]>;
     referral(project_url: string, campaign_url: string, wallet_address: string, referral_only: boolean): Promise<void>;
+    triggerEvent(project_url: string, campaign_url: string, wallet_address: string, event_hash: string, data: string): Promise<void>;
 }
