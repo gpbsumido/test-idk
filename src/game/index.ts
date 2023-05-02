@@ -225,4 +225,151 @@ export class Game extends Base {
     return this.postRequest(`/sdk/game/campaign/event`,params);
   }
 
+  claimRewards(
+    project_url: string,
+    campaign_url: string,
+    wallet_address: string,
+    nonce: string
+  ): Promise<{
+    reward_ids: string[],
+    contract_types: string[],
+    amounts: string[],
+    nonce: string,
+    signature: string,
+  }> {
+
+    var params:{
+      project_url: string,
+      campaign_url: string,
+      wallet_address: string,
+      nonce: string
+    } = {
+      project_url: project_url,
+      campaign_url: campaign_url,
+      wallet_address: wallet_address,
+      nonce: nonce
+    }
+    
+    return this.postRequest(`/sdk/game/campaigns/reward/claim`,params);
+  }
+
+  rewards(
+    project_url: string,
+    campaign_url: string,
+    wallet_address: string,
+    page_size?: string, //min 5, default 10
+    page?: string //min 1, default 1
+  ): Promise<any[]> {
+
+    var params:{
+      project_url: string,
+      campaign_url: string,
+      wallet_address: string,
+      page_size?: string,
+      page?: string
+    } = { 
+      project_url: project_url,
+      campaign_url: campaign_url,
+      wallet_address: wallet_address
+    }
+    if (page_size) params.page_size = page_size;
+    if (page) params.page = page;
+    
+    return this.getRequest(`/sdk/game/campaign/rewards`,params);
+  }
+
+  rewardConditions(
+    project_url: string,
+    campaign_url: string,
+    page_size?: string, //min 5, default 10
+    page?: string //min 1, default 1
+  ): Promise<any[]> {
+
+    var params:{
+      project_url: string,
+      campaign_url: string,
+      page_size?: string,
+      page?: string
+    } = { 
+      project_url: project_url,
+      campaign_url: campaign_url,
+    }
+    if (page_size) params.page_size = page_size;
+    if (page) params.page = page;
+    
+    return this.getRequest(`/sdk/game/campaign/rewards/conditions`,params);
+  }
+
+  userRewards(
+    project_url: string,
+    campaign_url: string,
+    wallet_address: string,
+  ): Promise<any[]> {
+
+    var params:{
+      project_url: string,
+      campaign_url: string,
+      wallet_address: string,
+    } = { 
+      project_url: project_url,
+      campaign_url: campaign_url,
+      wallet_address: wallet_address,
+    }
+    
+    return this.getRequest(`/sdk/game/campaign/reward/claimable`,params);
+  }
+
+  addTagToUser(
+    project_id: string,
+    wallet_address: string,
+    tag: string,
+  ): Promise<void> {
+
+    var params:{
+      project_id: string,
+      wallet_address: string,
+      tag: string,
+    } = { 
+      project_id: project_id,
+      wallet_address: wallet_address,
+      tag: tag,
+    }
+    
+    return this.postRequest(`/sdk/game/game_projects/tag/add`,params);
+  }
+
+  removeTagFromUser(
+    project_id: string,
+    wallet_address: string,
+    tag: string,
+  ): Promise<void> {
+
+    var params:{
+      project_id: string,
+      wallet_address: string,
+      tag: string,
+    } = { 
+      project_id: project_id,
+      wallet_address: wallet_address,
+      tag: tag,
+    }
+    
+    return this.postRequest(`/sdk/game/game_projects/tag/remove`,params);
+  }
+
+  getWalletsFromTags(
+    project_id: string,
+    tags: string[],
+  ): Promise<any[]> {
+
+    var params:{
+      project_id: string,
+      tags: string[],
+    } = { 
+      project_id: project_id,
+      tags: tags
+    }
+    
+    return this.getRequest(`/sdk/game/game_projects/tag`,params);
+  }
 }

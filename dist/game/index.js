@@ -89,5 +89,72 @@ class Game extends base_1.Base {
         };
         return this.postRequest(`/sdk/game/campaign/event`, params);
     }
+    claimRewards(project_url, campaign_url, wallet_address, nonce) {
+        var params = {
+            project_url: project_url,
+            campaign_url: campaign_url,
+            wallet_address: wallet_address,
+            nonce: nonce
+        };
+        return this.postRequest(`/sdk/game/campaigns/reward/claim`, params);
+    }
+    rewards(project_url, campaign_url, wallet_address, page_size, //min 5, default 10
+    page //min 1, default 1
+    ) {
+        var params = {
+            project_url: project_url,
+            campaign_url: campaign_url,
+            wallet_address: wallet_address
+        };
+        if (page_size)
+            params.page_size = page_size;
+        if (page)
+            params.page = page;
+        return this.getRequest(`/sdk/game/campaign/rewards`, params);
+    }
+    rewardConditions(project_url, campaign_url, page_size, //min 5, default 10
+    page //min 1, default 1
+    ) {
+        var params = {
+            project_url: project_url,
+            campaign_url: campaign_url,
+        };
+        if (page_size)
+            params.page_size = page_size;
+        if (page)
+            params.page = page;
+        return this.getRequest(`/sdk/game/campaign/rewards/conditions`, params);
+    }
+    userRewards(project_url, campaign_url, wallet_address) {
+        var params = {
+            project_url: project_url,
+            campaign_url: campaign_url,
+            wallet_address: wallet_address,
+        };
+        return this.getRequest(`/sdk/game/campaign/reward/claimable`, params);
+    }
+    addTagToUser(project_id, wallet_address, tag) {
+        var params = {
+            project_id: project_id,
+            wallet_address: wallet_address,
+            tag: tag,
+        };
+        return this.postRequest(`/sdk/game/game_projects/tag/add`, params);
+    }
+    removeTagFromUser(project_id, wallet_address, tag) {
+        var params = {
+            project_id: project_id,
+            wallet_address: wallet_address,
+            tag: tag,
+        };
+        return this.postRequest(`/sdk/game/game_projects/tag/remove`, params);
+    }
+    getWalletsFromTags(project_id, tags) {
+        var params = {
+            project_id: project_id,
+            tags: tags
+        };
+        return this.getRequest(`/sdk/game/game_projects/tag`, params);
+    }
 }
 exports.Game = Game;
