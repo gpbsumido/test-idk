@@ -297,7 +297,7 @@ export class Game extends Base {
     if (page_size) params.page_size = page_size;
     if (page) params.page = page;
     
-    return this.getRequest(`/sdk/game/campaign/rewards/conditions`,params);
+    return this.getRequest(`/sdk/game/campaign/reward-conditions`,params);
   }
 
   userRewards(
@@ -316,60 +316,60 @@ export class Game extends Base {
       wallet_address: wallet_address,
     }
     
-    return this.getRequest(`/sdk/game/campaign/reward/claimable`,params);
+    return this.getRequest(`/sdk/game/campaign/user-rewards`,params);
   }
 
   addTagToUser(
-    project_id: string,
+    project_url: string,
     wallet_address: string,
     tag: string,
   ): Promise<void> {
 
     var params:{
-      project_id: string,
+      project_url: string,
       wallet_address: string,
       tag: string,
     } = { 
-      project_id: project_id,
+      project_url: project_url,
       wallet_address: wallet_address,
       tag: tag,
     }
     
-    return this.postRequest(`/sdk/game/game_projects/tag/add`,params);
+    return this.postRequest(`/sdk/game/add-tag`,params);
   }
 
   removeTagFromUser(
-    project_id: string,
+    project_url: string,
     wallet_address: string,
     tag: string,
   ): Promise<void> {
 
     var params:{
-      project_id: string,
+      project_url: string,
       wallet_address: string,
       tag: string,
     } = { 
-      project_id: project_id,
+      project_url: project_url,
       wallet_address: wallet_address,
       tag: tag,
     }
     
-    return this.postRequest(`/sdk/game/game_projects/tag/remove`,params);
+    return this.postRequest(`/sdk/game/remove-tag`,params);
   }
 
   getWalletsFromTags(
-    project_id: string,
+    project_url: string,
     tags: string[],
   ): Promise<any[]> {
 
     var params:{
-      project_id: string,
+      project_url: string,
       tags: string[],
     } = { 
-      project_id: project_id,
+      project_url: project_url,
       tags: tags
     }
     
-    return this.getRequest(`/sdk/game/game_projects/tag`,params);
+    return this.getRequest(`/sdk/game/wallets-from-tag`,params);
   }
 }

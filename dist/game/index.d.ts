@@ -37,7 +37,7 @@ export declare class Game extends Base {
     rewardConditions(project_url: string, campaign_url: string, page_size?: string, //min 5, default 10
     page?: string): Promise<any[]>;
     userRewards(project_url: string, campaign_url: string, wallet_address: string): Promise<any[]>;
-    addTagToUser(project_id: string, wallet_address: string, tag: string): Promise<void>;
-    removeTagFromUser(project_id: string, wallet_address: string, tag: string): Promise<void>;
-    getWalletsFromTags(project_id: string, tags: string[]): Promise<any[]>;
+    addTagToUser(project_url: string, wallet_address: string, tag: string): Promise<void>;
+    removeTagFromUser(project_url: string, wallet_address: string, tag: string): Promise<void>;
+    getWalletsFromTags(project_url: string, tags: string[]): Promise<any[]>;
 }

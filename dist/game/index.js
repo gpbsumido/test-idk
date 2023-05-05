@@ -139,7 +139,7 @@ class Game extends base_1.Base {
             params.page_size = page_size;
         if (page)
             params.page = page;
-        return this.getRequest(`/sdk/game/campaign/rewards/conditions`, params);
+        return this.getRequest(`/sdk/game/campaign/reward-conditions`, params);
     }
     userRewards(project_url, campaign_url, wallet_address) {
         var params = {
@@ -147,30 +147,30 @@ class Game extends base_1.Base {
             campaign_url: campaign_url,
             wallet_address: wallet_address,
         };
-        return this.getRequest(`/sdk/game/campaign/reward/claimable`, params);
+        return this.getRequest(`/sdk/game/campaign/user-rewards`, params);
     }
-    addTagToUser(project_id, wallet_address, tag) {
+    addTagToUser(project_url, wallet_address, tag) {
         var params = {
-            project_id: project_id,
+            project_url: project_url,
             wallet_address: wallet_address,
             tag: tag,
         };
-        return this.postRequest(`/sdk/game/game_projects/tag/add`, params);
+        return this.postRequest(`/sdk/game/add-tag`, params);
     }
-    removeTagFromUser(project_id, wallet_address, tag) {
+    removeTagFromUser(project_url, wallet_address, tag) {
         var params = {
-            project_id: project_id,
+            project_url: project_url,
             wallet_address: wallet_address,
             tag: tag,
         };
-        return this.postRequest(`/sdk/game/game_projects/tag/remove`, params);
+        return this.postRequest(`/sdk/game/remove-tag`, params);
     }
-    getWalletsFromTags(project_id, tags) {
+    getWalletsFromTags(project_url, tags) {
         var params = {
-            project_id: project_id,
+            project_url: project_url,
             tags: tags
         };
-        return this.getRequest(`/sdk/game/game_projects/tag`, params);
+        return this.getRequest(`/sdk/game/wallets-from-tag`, params);
     }
 }
 exports.Game = Game;
