@@ -225,33 +225,33 @@ export class Game extends Base {
     return this.postRequest(`/sdk/game/campaign/event`,params);
   }
 
-  claimRewards(
-    project_url: string,
-    campaign_url: string,
-    wallet_address: string,
-    nonce: string
-  ): Promise<{
-    reward_ids: string[],
-    contract_types: string[],
-    amounts: string[],
-    nonce: string,
-    signature: string,
-  }> {
+  //claimRewards(
+  //  project_url: string,
+  //  campaign_url: string,
+  //  wallet_address: string,
+  //  nonce: string
+  //): Promise<{
+  //  reward_ids: string[],
+  //  contract_types: string[],
+  //  amounts: string[],
+  //  nonce: string,
+  //  signature: string,
+  //}> {
 
-    var params:{
-      project_url: string,
-      campaign_url: string,
-      wallet_address: string,
-      nonce: string
-    } = {
-      project_url: project_url,
-      campaign_url: campaign_url,
-      wallet_address: wallet_address,
-      nonce: nonce
-    }
+  //  var params:{
+  //    project_url: string,
+  //    campaign_url: string,
+  //    wallet_address: string,
+  //    nonce: string
+  //  } = {
+  //    project_url: project_url,
+  //    campaign_url: campaign_url,
+  //    wallet_address: wallet_address,
+  //    nonce: nonce
+  //  }
     
-    return this.postRequest(`/sdk/game/campaigns/reward/claim`,params);
-  }
+  //  return this.postRequest(`/sdk/game/campaigns/reward/claim`,params);
+  //}
 
   rewards(
     project_url: string,
