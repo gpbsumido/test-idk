@@ -114,13 +114,12 @@ class Game extends base_1.Base {
     //  }
     //  return this.postRequest(`/sdk/game/campaigns/reward/claim`,params);
     //}
-    rewards(project_url, campaign_url, wallet_address, page_size, //min 5, default 10
+    rewards(project_url, campaign_url, page_size, //min 5, default 10
     page //min 1, default 1
     ) {
         var params = {
             project_url: project_url,
             campaign_url: campaign_url,
-            wallet_address: wallet_address
         };
         if (page_size)
             params.page_size = page_size;

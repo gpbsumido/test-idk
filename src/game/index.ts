@@ -256,7 +256,6 @@ export class Game extends Base {
   rewards(
     project_url: string,
     campaign_url: string,
-    wallet_address: string,
     page_size?: string, //min 5, default 10
     page?: string //min 1, default 1
   ): Promise<any[]> {
@@ -264,13 +263,11 @@ export class Game extends Base {
     var params:{
       project_url: string,
       campaign_url: string,
-      wallet_address: string,
       page_size?: string,
       page?: string
     } = { 
       project_url: project_url,
       campaign_url: campaign_url,
-      wallet_address: wallet_address
     }
     if (page_size) params.page_size = page_size;
     if (page) params.page = page;

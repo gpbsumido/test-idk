@@ -32,7 +32,7 @@ export declare class Game extends Base {
     }[]>;
     referral(project_url: string, campaign_url: string, wallet_address: string, referral_only: boolean): Promise<void>;
     triggerEvent(project_url: string, campaign_url: string, wallet_address: string, event_hash: string, data: string): Promise<void>;
-    rewards(project_url: string, campaign_url: string, wallet_address: string, page_size?: string, //min 5, default 10
+    rewards(project_url: string, campaign_url: string, page_size?: string, //min 5, default 10
     page?: string): Promise<any[]>;
     rewardConditions(project_url: string, campaign_url: string, page_size?: string, //min 5, default 10
     page?: string): Promise<any[]>;
