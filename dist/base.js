@@ -5,10 +5,31 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Base = void 0;
 const axios_1 = __importDefault(require("axios"));
+const index_1 = require("./index");
 class Base {
     constructor(config) {
         this.apiKey = config.apiKey;
-        this.baseUrl = 'http://localhost:3000';
+        switch (config.baseUrlOption) {
+            case index_1.BaseURLOptions.EVENTS_LOCAL:
+                this.baseUrl = 'http://localhost:8181/v1';
+                return;
+            case index_1.BaseURLOptions.EVENTS_MAINNET:
+                this.baseUrl = 'https://api.helika.io/v1';
+                return;
+            case index_1.BaseURLOptions.EVENTS_TESTNET:
+                this.baseUrl = 'https://api-stage.helika.io/v1';
+                return;
+            case index_1.BaseURLOptions.UA_LOCAL:
+                this.baseUrl = 'http://localhost:3000';
+                return;
+            case index_1.BaseURLOptions.UA_MAINNET:
+                this.baseUrl = 'https://ua-api.helika.io';
+                return;
+            case index_1.BaseURLOptions.UA_TESTNET:
+            default:
+                this.baseUrl = 'https://ua-api-dev.helika.io';
+                return;
+        }
     }
     getRequest(endpoint, options) {
         const url = `${this.baseUrl}${endpoint}`;

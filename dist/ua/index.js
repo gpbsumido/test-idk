@@ -1,23 +1,22 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.NFT = void 0;
-const __1 = require("..");
+exports.UA = void 0;
 const base_1 = require("../base");
-class NFT extends base_1.Base {
+class UA extends base_1.Base {
     constructor(config) {
         super(config);
-        switch (config.baseUrlOption) {
-            case __1.BaseURLOptions.LOCAL:
-                this.baseUrl = 'https://api-stage.helika.io/v1';
-                return;
-            case __1.BaseURLOptions.MAINNET:
-                this.baseUrl = 'https://api-stage.helika.io/v1';
-                return;
-            case __1.BaseURLOptions.TESTNET:
-            default:
-                this.baseUrl = 'https://api-stage.helika.io/v1';
-                return;
-        }
+        //switch (config.baseUrlOption) {
+        //  case BaseURLOptions.UA_LOCAL:
+        //      this.baseUrl = 'http://localhost:3000';
+        //      return;
+        //  case BaseURLOptions.UA_MAINNET:
+        //      this.baseUrl = 'https://ua-api.helika.io';
+        //      return;
+        //  case BaseURLOptions.UA_TESTNET:
+        //  default:
+        //      this.baseUrl = 'https://ua-api-dev.helika.io';
+        //      return;
+        //}
     }
     logView(custom_url, link_id) {
         var params = {
@@ -59,4 +58,4 @@ class NFT extends base_1.Base {
         return this.getRequest(`/sdk/nft/affiliate`, params);
     }
 }
-exports.NFT = NFT;
+exports.UA = UA;
