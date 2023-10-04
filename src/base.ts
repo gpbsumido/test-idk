@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BaseURLOptions } from "./index"
+import { BaseURLOptions } from "./index";
 
 export type Config = {
   apiKey: string;
@@ -12,6 +12,7 @@ export abstract class Base {
 
   constructor(config: Config) {
     this.apiKey = config.apiKey;
+
     switch (config.baseUrlOption) {
       case BaseURLOptions.EVENTS_LOCAL:
           this.baseUrl = 'http://localhost:8181/v1';
@@ -33,6 +34,19 @@ export abstract class Base {
           this.baseUrl = 'https://ua-api-dev.helika.io';
           return;
     }
+
+  }
+
+  protected getFP():any{
+    return new Promise((resolve, reject) => {
+      // @ts-ignore Import moduleconst 
+      import('https://fpjscdn.net/v3/1V2jYOavAUDljc9GxEgu')
+        .then((respA: any) => {
+          let response = respA.default;
+          resolve(response)
+        })
+        .catch(reject);
+    });
   }
 
   protected getRequest<T>(endpoint: string, options?: any): Promise<T> {
