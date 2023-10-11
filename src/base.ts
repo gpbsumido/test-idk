@@ -16,27 +16,48 @@ export abstract class Base {
     this.apiKey = config.apiKey;
     this.sessionID = v4();
 
+    var projectType = "UA";
     switch (config.baseUrlOption) {
       case BaseURLOptions.EVENTS_LOCAL:
           this.baseUrl = 'http://localhost:8181/v1';
-          return;
+          projectType = "Events";
+          break;
       case BaseURLOptions.EVENTS_MAINNET:
           this.baseUrl = 'https://api.helika.io/v1';
-          return;
+          projectType = "Events";
+          break;
       case BaseURLOptions.EVENTS_TESTNET:
           this.baseUrl = 'https://api-stage.helika.io/v1';
-          return;
+          projectType = "Events";
+          break;
       case BaseURLOptions.UA_LOCAL:
           this.baseUrl = 'http://localhost:3000';
-          return;
+          break;
       case BaseURLOptions.UA_MAINNET:
           this.baseUrl = 'https://ua-api.helika.io';
-          return;
+          break;
       case BaseURLOptions.UA_TESTNET:
       default:
           this.baseUrl = 'https://ua-api-dev.helika.io';
-          return;
+          break;
     }
+
+    //send event to initiate session
+    var initevent = {
+      created_at: new Date().toISOString(),
+      game_id: 'HELIKA_SDK',
+      event_type: 'SESSION_CREATED',
+      event: {
+        message: 'Session created',
+        sdk_type: 'Event',
+        project_type: projectType
+      }
+    };
+    let params = {
+      id: this.sessionID,
+      events: [initevent]
+    }
+    this.postRequest(`/game/game-event`,params);
 
   }
 
