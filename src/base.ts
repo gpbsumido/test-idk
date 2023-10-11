@@ -16,19 +16,19 @@ export abstract class Base {
     this.apiKey = config.apiKey;
     this.sessionID = v4();
 
-    var projectType = "UA";
+    var sdk_type = "UA";
     switch (config.baseUrlOption) {
       case BaseURLOptions.EVENTS_LOCAL:
           this.baseUrl = 'http://localhost:8181/v1';
-          projectType = "Events";
+          sdk_type = "Events";
           break;
       case BaseURLOptions.EVENTS_MAINNET:
           this.baseUrl = 'https://api.helika.io/v1';
-          projectType = "Events";
+          sdk_type = "Events";
           break;
       case BaseURLOptions.EVENTS_TESTNET:
           this.baseUrl = 'https://api-stage.helika.io/v1';
-          projectType = "Events";
+          sdk_type = "Events";
           break;
       case BaseURLOptions.UA_LOCAL:
           this.baseUrl = 'http://localhost:3000';
@@ -41,23 +41,9 @@ export abstract class Base {
           this.baseUrl = 'https://ua-api-dev.helika.io';
           break;
     }
-
-    //send event to initiate session
-    var initevent = {
-      created_at: new Date().toISOString(),
-      game_id: 'HELIKA_SDK',
-      event_type: 'SESSION_CREATED',
-      event: {
-        message: 'Session created',
-        sdk_type: 'Event',
-        project_type: projectType
-      }
-    };
-    let params = {
-      id: this.sessionID,
-      events: [initevent]
-    }
-    this.postRequest(`/game/game-event`,params);
+    this.onSessionCreated({
+      sdk_type: sdk_type
+    });
 
   }
 
@@ -81,6 +67,14 @@ export abstract class Base {
       fingerprint_id: fingerprintData?.visitorId,
       request_id: fingerprintData?.requestId
     }
+  }
+
+  protected async fullFingerprint(): Promise<any> {
+    let func = await this.getFP();
+    let loaded = await func.load();
+    return await loaded.get({
+      extendedResult: true
+    });
   }
 
   protected getUrlParam(paramName: string){
@@ -142,6 +136,29 @@ export abstract class Base {
         })
         .catch(reject);
     });
+  }
+
+  protected async onSessionCreated<T>(params?: any): Promise<T> {
+
+    let fpData = await this.fullFingerprint();
+
+    //send event to initiate session
+    var initevent = {
+      created_at: new Date().toISOString(),
+      game_id: 'HELIKA_SDK',
+      event_type: 'SESSION_CREATED',
+      event: {
+        message: 'Session created',
+        sdk_type: params.sdk_type,
+        fp_data: fpData
+      }
+    };
+    let event_params = {
+      id: this.sessionID,
+      events: [initevent]
+    }
+
+    return this.postRequest(`/game/game-event`,event_params);
   }
   
 }
