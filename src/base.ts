@@ -1,11 +1,13 @@
 import axios from "axios";
-import { BaseURLOptions } from "./index";
+import { BaseURLOptions, fingerprint } from "./index";
 import { v4 } from 'uuid';
 
 export type Config = {
   apiKey: string;
   baseUrlOption?: BaseURLOptions;
 };
+
+const fpApiKey = '1V2jYOavAUDljc9GxEgu';
 
 export abstract class Base {
   private apiKey: string;
@@ -47,21 +49,11 @@ export abstract class Base {
 
   }
 
-  protected getFP():any{
-    return new Promise((resolve, reject) => {
-      // @ts-ignore Import moduleconst 
-      import('https://fpjscdn.net/v3/1V2jYOavAUDljc9GxEgu')
-        .then((respA: any) => {
-          let response = respA.default;
-          resolve(response)
-        })
-        .catch(reject);
-    });
-  }
-
   protected async fingerprint(): Promise<any> {
-    let func = await this.getFP();
-    let loaded = await func.load();
+    let loadOptions = {
+      apiKey: fpApiKey
+    }
+    let loaded = await fingerprint.load(loadOptions);
     let fingerprintData = await loaded.get();
     return {
       fingerprint_id: fingerprintData?.visitorId,
@@ -70,8 +62,10 @@ export abstract class Base {
   }
 
   protected async fullFingerprint(): Promise<any> {
-    let func = await this.getFP();
-    let loaded = await func.load();
+    let loadOptions = {
+      apiKey: fpApiKey
+    }
+    let loaded = await fingerprint.load(loadOptions);
     return await loaded.get({
       extendedResult: true
     });
