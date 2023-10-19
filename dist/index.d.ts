@@ -17,10 +17,10 @@ declare const _default: {
 export default _default;
 export declare enum BaseURLOptions {
     UA_LOCAL = 0,
-    UA_TESTNET = 1,
-    UA_MAINNET = 2,
+    UA_DEV = 1,
+    UA_PROD = 2,
     EVENTS_LOCAL = 3,
-    EVENTS_TESTNET = 4,
-    EVENTS_MAINNET = 5
+    EVENTS_DEV = 4,
+    EVENTS_PROD = 5
 }
 export declare const fingerprint: typeof FingerprintJSPro;

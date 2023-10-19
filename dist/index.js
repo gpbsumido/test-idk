@@ -16,10 +16,10 @@ exports.default = { EVENTS: EVENTS_INTERNAL, UA: UA_INTERNAL };
 var BaseURLOptions;
 (function (BaseURLOptions) {
     BaseURLOptions[BaseURLOptions["UA_LOCAL"] = 0] = "UA_LOCAL";
-    BaseURLOptions[BaseURLOptions["UA_TESTNET"] = 1] = "UA_TESTNET";
-    BaseURLOptions[BaseURLOptions["UA_MAINNET"] = 2] = "UA_MAINNET";
+    BaseURLOptions[BaseURLOptions["UA_DEV"] = 1] = "UA_DEV";
+    BaseURLOptions[BaseURLOptions["UA_PROD"] = 2] = "UA_PROD";
     BaseURLOptions[BaseURLOptions["EVENTS_LOCAL"] = 3] = "EVENTS_LOCAL";
-    BaseURLOptions[BaseURLOptions["EVENTS_TESTNET"] = 4] = "EVENTS_TESTNET";
-    BaseURLOptions[BaseURLOptions["EVENTS_MAINNET"] = 5] = "EVENTS_MAINNET";
+    BaseURLOptions[BaseURLOptions["EVENTS_DEV"] = 4] = "EVENTS_DEV";
+    BaseURLOptions[BaseURLOptions["EVENTS_PROD"] = 5] = "EVENTS_PROD";
 })(BaseURLOptions = exports.BaseURLOptions || (exports.BaseURLOptions = {}));
 exports.fingerprint = fingerprintjs_pro_react_1.FingerprintJSPro;
