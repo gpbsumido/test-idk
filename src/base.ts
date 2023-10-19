@@ -24,21 +24,21 @@ export abstract class Base {
           this.baseUrl = 'http://localhost:8181/v1';
           sdk_type = "Events";
           break;
-      case BaseURLOptions.EVENTS_MAINNET:
+      case BaseURLOptions.EVENTS_PROD:
           this.baseUrl = 'https://api.helika.io/v1';
           sdk_type = "Events";
           break;
-      case BaseURLOptions.EVENTS_TESTNET:
+      case BaseURLOptions.EVENTS_DEV:
           this.baseUrl = 'https://api-stage.helika.io/v1';
           sdk_type = "Events";
           break;
       case BaseURLOptions.UA_LOCAL:
           this.baseUrl = 'http://localhost:3000';
           break;
-      case BaseURLOptions.UA_MAINNET:
+      case BaseURLOptions.UA_PROD:
           this.baseUrl = 'https://ua-api.helika.io';
           break;
-      case BaseURLOptions.UA_TESTNET:
+      case BaseURLOptions.UA_DEV:
       default:
           this.baseUrl = 'https://ua-api-dev.helika.io';
           break;
