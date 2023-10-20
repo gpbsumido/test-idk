@@ -15,10 +15,10 @@ applyMixins(EVENTS_INTERNAL, [EVENTS]);
 export default { EVENTS: EVENTS_INTERNAL, UA: UA_INTERNAL }
 
 export enum BaseURLOptions {
-  UA_LOCAL,
+  //UA_LOCAL,
   UA_DEV,
   UA_PROD,
-  EVENTS_LOCAL,
+  //EVENTS_LOCAL,
   EVENTS_DEV,
   EVENTS_PROD,
 }

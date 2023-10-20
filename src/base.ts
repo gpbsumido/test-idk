@@ -20,10 +20,10 @@ export abstract class Base {
 
     var sdk_type = "UA";
     switch (config.baseUrlOption) {
-      case BaseURLOptions.EVENTS_LOCAL:
-          this.baseUrl = 'http://localhost:8181/v1';
-          sdk_type = "Events";
-          break;
+      //case BaseURLOptions.EVENTS_LOCAL:
+      //    this.baseUrl = 'http://localhost:8181/v1';
+      //    sdk_type = "Events";
+      //    break;
       case BaseURLOptions.EVENTS_PROD:
           this.baseUrl = 'https://api.helika.io/v1';
           sdk_type = "Events";
@@ -32,9 +32,9 @@ export abstract class Base {
           this.baseUrl = 'https://api-stage.helika.io/v1';
           sdk_type = "Events";
           break;
-      case BaseURLOptions.UA_LOCAL:
-          this.baseUrl = 'http://localhost:3000';
-          break;
+      //case BaseURLOptions.UA_LOCAL:
+      //    this.baseUrl = 'http://localhost:3000';
+      //    break;
       case BaseURLOptions.UA_PROD:
           this.baseUrl = 'https://ua-api.helika.io';
           break;

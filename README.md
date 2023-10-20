@@ -15,6 +15,36 @@ npm i helika-sdk
 
 ## Usage	
 
+### API KEY
+
+An API Key is required to use the SDK.
+
+For a UA SDK instance, a UA SDK Key is required. This can be obtained by going to https://ua.helika.io and having a Creator account. Once you've created a Creator account, you can find your API Key in the settings modal, which can be opened at the top right of the app.
+
+For an Events SDK Instance, an API Key from Helika is required. Please reach out to your Helika contact or inquiring through https://www.helika.io/contact/ .
+
+### baseUrlOption
+
+The SDK can send to DEV or PROD endpoints depending on the baseUrlOption option to the sdk on instance creation (see step 1 in Instance Creation section).
+
+For a UA SDK Instance, you can send to endpoints using these options:
+
+  UA_DEV,
+  UA_PROD,
+
+DEV Endpoint: https://ua-api.helika.io (for DEVELOPMENT testing) -> by using BaseURLOptions.UA_DEV in instance creation
+PROD Endpoint: https://ua-api-dev.helika.io (for PRODUCTION testing) -> by using BaseURLOptions.UA_PROD in instance creation
+
+For a Events SDK Instance, you can send to endpoints using these options:
+
+  EVENTS_DEV,
+  EVENTS_PROD,
+
+DEV Endpoint: https://api-stage.helika.io/v1 (for DEVELOPMENT testing) -> by using BaseURLOptions.EVENTS_DEV in instance creation
+PROD Endpoint: https://api.helika.io/v1 (for PRODUCTION testing) -> by using BaseURLOptions.EVENTS_PROD in instance creation
+
+### Instance Creation
+
 There are two main uses for the Helika SDK
 
 0.) Creating an instance of the Helika SDK initiates a session. Therefore, each instance will have a session id available through the instance (i.e. helikaCaller.sessionID)

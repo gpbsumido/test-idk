@@ -23,10 +23,10 @@ class Base {
         this.sessionID = (0, uuid_1.v4)();
         var sdk_type = "UA";
         switch (config.baseUrlOption) {
-            case index_1.BaseURLOptions.EVENTS_LOCAL:
-                this.baseUrl = 'http://localhost:8181/v1';
-                sdk_type = "Events";
-                break;
+            //case BaseURLOptions.EVENTS_LOCAL:
+            //    this.baseUrl = 'http://localhost:8181/v1';
+            //    sdk_type = "Events";
+            //    break;
             case index_1.BaseURLOptions.EVENTS_PROD:
                 this.baseUrl = 'https://api.helika.io/v1';
                 sdk_type = "Events";
@@ -35,9 +35,9 @@ class Base {
                 this.baseUrl = 'https://api-stage.helika.io/v1';
                 sdk_type = "Events";
                 break;
-            case index_1.BaseURLOptions.UA_LOCAL:
-                this.baseUrl = 'http://localhost:3000';
-                break;
+            //case BaseURLOptions.UA_LOCAL:
+            //    this.baseUrl = 'http://localhost:3000';
+            //    break;
             case index_1.BaseURLOptions.UA_PROD:
                 this.baseUrl = 'https://ua-api.helika.io';
                 break;

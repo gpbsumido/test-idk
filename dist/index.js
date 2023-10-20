@@ -15,11 +15,11 @@ class EVENTS_INTERNAL extends base_1.Base {
 exports.default = { EVENTS: EVENTS_INTERNAL, UA: UA_INTERNAL };
 var BaseURLOptions;
 (function (BaseURLOptions) {
-    BaseURLOptions[BaseURLOptions["UA_LOCAL"] = 0] = "UA_LOCAL";
-    BaseURLOptions[BaseURLOptions["UA_DEV"] = 1] = "UA_DEV";
-    BaseURLOptions[BaseURLOptions["UA_PROD"] = 2] = "UA_PROD";
-    BaseURLOptions[BaseURLOptions["EVENTS_LOCAL"] = 3] = "EVENTS_LOCAL";
-    BaseURLOptions[BaseURLOptions["EVENTS_DEV"] = 4] = "EVENTS_DEV";
-    BaseURLOptions[BaseURLOptions["EVENTS_PROD"] = 5] = "EVENTS_PROD";
+    //UA_LOCAL,
+    BaseURLOptions[BaseURLOptions["UA_DEV"] = 0] = "UA_DEV";
+    BaseURLOptions[BaseURLOptions["UA_PROD"] = 1] = "UA_PROD";
+    //EVENTS_LOCAL,
+    BaseURLOptions[BaseURLOptions["EVENTS_DEV"] = 2] = "EVENTS_DEV";
+    BaseURLOptions[BaseURLOptions["EVENTS_PROD"] = 3] = "EVENTS_PROD";
 })(BaseURLOptions = exports.BaseURLOptions || (exports.BaseURLOptions = {}));
 exports.fingerprint = fingerprintjs_pro_react_1.FingerprintJSPro;
