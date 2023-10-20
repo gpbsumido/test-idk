@@ -2,7 +2,7 @@
 
 SDK for use with the UA endpoints (https://ua-api.helika.io or https://ua-api-dev.helika.io) or the Events endpoints (https://api.helika.io/v1 or https://api-stage.helika.io/v1)
 
-The Helika SDK is for developers to be able to make API calls to the Helika Mainnet and Testnet endpoints.
+The Helika SDK is for developers to be able to make API calls to the Helika DEV and PROD endpoints.
 The following pages will describe how to make calls to the Helika API. Developers will need to install the helika-sdk to their project.
 
 ## Installation
@@ -14,6 +14,36 @@ npm i helika-sdk
 
 
 ## Usage	
+
+### API KEY
+
+An API Key is required to use the SDK.
+
+For a UA SDK instance, a UA SDK Key is required. This can be obtained by going to https://ua.helika.io and having a Creator account. Once you've created a Creator account, you can find your API Key in the settings modal, which can be opened at the top right of the app.
+
+For an Events SDK Instance, an API Key from Helika is required. Please reach out to your Helika contact or inquiring through https://www.helika.io/contact/ .
+
+### baseUrlOption
+
+The SDK can send to DEV or PROD endpoints depending on the baseUrlOption option to the sdk on instance creation (see step 1 in Instance Creation section).
+
+For a UA SDK Instance, you can send to endpoints using these options:
+
+  UA_DEV,
+  UA_PROD,
+
+DEV Endpoint: https://ua-api.helika.io (for DEVELOPMENT testing) -> by using BaseURLOptions.UA_DEV in instance creation
+PROD Endpoint: https://ua-api-dev.helika.io (for PRODUCTION testing) -> by using BaseURLOptions.UA_PROD in instance creation
+
+For a Events SDK Instance, you can send to endpoints using these options:
+
+  EVENTS_DEV,
+  EVENTS_PROD,
+
+DEV Endpoint: https://api-stage.helika.io/v1 (for DEVELOPMENT testing) -> by using BaseURLOptions.EVENTS_DEV in instance creation
+PROD Endpoint: https://api.helika.io/v1 (for PRODUCTION testing) -> by using BaseURLOptions.EVENTS_PROD in instance creation
+
+### Instance Creation
 
 There are two main uses for the Helika SDK
 
@@ -29,13 +59,13 @@ import { BaseURLOptions } from "helika-sdk"
 
 var helikaCaller = new Helika.EVENTS({
 	apiKey: api_key,
-	baseUrlOption: BaseURLOptions.EVENTS_TESTNET
+	baseUrlOption: BaseURLOptions.EVENTS_DEV
 }); //session 1
 
 // if you want to create events with a different Session ID, create a new instane of the sdk
 var helikaCaller2 = new Helika.EVENTS({
 	apiKey: api_key,
-	baseUrlOption: BaseURLOptions.EVENTS_TESTNET
+	baseUrlOption: BaseURLOptions.EVENTS_DEV
 }); //session 2
 ```
 
@@ -67,7 +97,7 @@ import { BaseURLOptions } from "helika-sdk"
 
 var helikaCaller = new Helika.EVENTS({
 	apiKey: api_key,
-	baseUrlOption: BaseURLOptions.EVENTS_TESTNET
+	baseUrlOption: BaseURLOptions.EVENTS_DEV
 });
 
 events = [
@@ -114,7 +144,7 @@ import { BaseURLOptions } from "helika-sdk"
 
 var helikaCaller = new Helika.EVENTS({
 	apiKey: api_key,
-	baseUrlOption: BaseURLOptions.EVENTS_TESTNET
+	baseUrlOption: BaseURLOptions.EVENTS_DEV
 });
 
 events = [
@@ -160,15 +190,15 @@ import Helika from "helika-sdk"
 import { BaseURLOptions } from "helika-sdk"
 
 const wallet_adress = '0x123abc456def'; //insert wallet of referree here
-const url = 'helikausdk'; //(optional) example project on testnet
+const url = 'helikausdk'; //(optional) example project on DEV
 const link_id = 'fqOm45Jv'; //(optional) example link id for an ambassador on the example project
 const email_address = ''; // (optional) insert referree email here
 const phone_number = '1234567890' // (optional) insert referree phone number here
-const api_key = 'reYam27iBtMqeGuEhR2ywSV6440wo3gx2CcIC5IK6RNHRCvBoKAHdsNx3FyLz2t1'; //demo api key for testnet
+const api_key = 'reYam27iBtMqeGuEhR2ywSV6440wo3gx2CcIC5IK6RNHRCvBoKAHdsNx3FyLz2t1'; //demo api key for DEV
 
 var helikaUA = new Helika.UA({
 	apiKey: api_key,
-	baseUrl: BaseURLOptions.UA_TESTNET
+	baseUrl: BaseURLOptions.UA_DEV
 });
 
 helikaUA.logReferral(wallet_adress,url,link_id,email_address,phone_number).then((resp) => {
@@ -192,13 +222,13 @@ Response: N/A
 import Helika from "helika-sdk"
 import { BaseURLOptions } from "helika-sdk"
 
-const url = 'helikausdk'; // (optional) example project on testnet
+const url = 'helikausdk'; // (optional) example project on DEV
 const link_id = 'fqOm45Jv'; // (optional) example link id for an ambassador on the example project
-const api_key = 'reYam27iBtMqeGuEhR2ywSV6440wo3gx2CcIC5IK6RNHRCvBoKAHdsNx3FyLz2t1'; //demo api key for testnet
+const api_key = 'reYam27iBtMqeGuEhR2ywSV6440wo3gx2CcIC5IK6RNHRCvBoKAHdsNx3FyLz2t1'; //demo api key for DEV
 
 var helikaUA = new Helika.UA({
 	apiKey: api_key,
-	baseUrl: BaseURLOptions.UA_TESTNET
+	baseUrl: BaseURLOptions.UA_DEV
 });
 
 helikaUA.logView(url,link_id).then((resp) => {
@@ -226,7 +256,7 @@ const wallet_address = "0xE7bb679Fa033517393001e1E43b3d326016E0A0c";
 
 var helikaUA = new Helika.UA({
 	apiKey: api_key,
-	baseUrl: BaseURLOptions.UA_TESTNET
+	baseUrl: BaseURLOptions.UA_DEV
 });
 
 helikaUA.isAmbassador(
@@ -274,7 +304,7 @@ const wallet_address = "0xE7bb679Fa033517393001e1E43b3d326016E0A0c";
 
 var helikaUA = new Helika.UA({
 	apiKey: api_key,
-	baseUrl: BaseURLOptions.UA_TESTNET
+	baseUrl: BaseURLOptions.UA_DEV
 });
 
 helikaUA.ambassadorLink(

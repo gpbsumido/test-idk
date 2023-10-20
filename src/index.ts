@@ -15,12 +15,12 @@ applyMixins(EVENTS_INTERNAL, [EVENTS]);
 export default { EVENTS: EVENTS_INTERNAL, UA: UA_INTERNAL }
 
 export enum BaseURLOptions {
-  UA_LOCAL,
-  UA_TESTNET,
-  UA_MAINNET,
-  EVENTS_LOCAL,
-  EVENTS_TESTNET,
-  EVENTS_MAINNET,
+  //UA_LOCAL,
+  UA_DEV,
+  UA_PROD,
+  //EVENTS_LOCAL,
+  EVENTS_DEV,
+  EVENTS_PROD,
 }
 
 export const fingerprint = FingerprintJSPro;
