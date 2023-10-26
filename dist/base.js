@@ -16,11 +16,12 @@ exports.Base = void 0;
 const axios_1 = __importDefault(require("axios"));
 const index_1 = require("./index");
 const uuid_1 = require("uuid");
+const exenv_1 = __importDefault(require("exenv"));
 const fpApiKey = '1V2jYOavAUDljc9GxEgu';
 class Base {
     constructor(apiKey) {
         this.apiKey = apiKey;
-        this.sessionID = (0, uuid_1.v4)();
+        this.sessionID = null;
         this.baseUrl = "http://localhost:3000";
     }
     fingerprint() {
@@ -116,26 +117,54 @@ class Base {
                 .catch(reject);
         });
     }
-    onSessionCreated(params) {
+    sessionCreate(params) {
         return __awaiter(this, void 0, void 0, function* () {
-            let fpData = yield this.fullFingerprint();
+            this.sessionID = (0, uuid_1.v4)();
+            const sessionExpiry = this.addHours(new Date(), 1);
+            let fpData = {};
+            let utms = null;
+            let helika_referral_link = null;
+            try {
+                if (exenv_1.default.canUseDOM) {
+                    fpData = yield this.fullFingerprint();
+                    localStorage.setItem('sessionID', this.sessionID);
+                    localStorage.setItem('sessionExpiry', sessionExpiry);
+                    utms = this.getAllUrlParams();
+                    helika_referral_link = this.getUrlParam('linkId');
+                    if (utms) {
+                        localStorage.setItem('helika_utms', utms === null || utms === void 0 ? void 0 : utms.toString());
+                    }
+                    if (helika_referral_link) {
+                        localStorage.setItem('helika_referral_link', helika_referral_link);
+                    }
+                }
+            }
+            catch (e) {
+                console.log(e);
+            }
             //send event to initiate session
             var initevent = {
                 created_at: new Date().toISOString(),
                 game_id: 'HELIKA_SDK',
                 event_type: 'SESSION_CREATED',
                 event: {
-                    message: 'Session created',
+                    type: params.type,
                     sdk_class: params.sdk_class,
-                    fp_data: fpData
+                    fp_data: fpData,
+                    helika_referral_link: helika_referral_link,
+                    utms: utms
                 }
             };
             let event_params = {
                 id: this.sessionID,
                 events: [initevent]
             };
-            return this.postRequest(`/game/game-event`, event_params);
+            return yield this.postRequest(`/game/game-event`, event_params);
         });
+    }
+    addHours(date, hours) {
+        date.setHours(date.getHours() + hours);
+        return date.toString();
     }
 }
 exports.Base = Base;

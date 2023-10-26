@@ -1,17 +1,18 @@
 import axios from "axios";
 import { fingerprint } from "./index";
 import { v4 } from 'uuid';
+import ExecutionEnvironment from 'exenv';
 
 const fpApiKey = '1V2jYOavAUDljc9GxEgu';
 
 export abstract class Base {
   private apiKey: string;
   baseUrl: string;
-  sessionID: string;
+  sessionID: string | null;
 
   constructor(apiKey: string) {
     this.apiKey = apiKey;
-    this.sessionID = v4();
+    this.sessionID = null;
     this.baseUrl = "http://localhost:3000";
   }
 
@@ -110,9 +111,30 @@ export abstract class Base {
     });
   }
 
-  protected async onSessionCreated<T>(params?: any): Promise<T> {
+  protected async sessionCreate<T>(params?: any): Promise<{ message: string }> {
 
-    let fpData = await this.fullFingerprint();
+    this.sessionID = v4();
+    const sessionExpiry = this.addHours(new Date(), 1);
+    let fpData = {};
+    let utms = null;
+    let helika_referral_link = null;
+    try {
+      if (ExecutionEnvironment.canUseDOM) {
+        fpData = await this.fullFingerprint();
+        localStorage.setItem('sessionID',this.sessionID);
+        localStorage.setItem('sessionExpiry',sessionExpiry);
+        utms = this.getAllUrlParams();
+        helika_referral_link = this.getUrlParam('linkId');
+        if (utms) {
+          localStorage.setItem('helika_utms',utms?.toString())
+        }
+        if (helika_referral_link) {
+          localStorage.setItem('helika_referral_link',helika_referral_link);
+        }
+      }
+    } catch(e) {
+      console.log(e);
+    }
 
     //send event to initiate session
     var initevent = {
@@ -120,9 +142,11 @@ export abstract class Base {
       game_id: 'HELIKA_SDK',
       event_type: 'SESSION_CREATED',
       event: {
-        message: 'Session created',
+        type: params.type,
         sdk_class: params.sdk_class,
-        fp_data: fpData
+        fp_data: fpData,
+        helika_referral_link: helika_referral_link,
+        utms: utms
       }
     };
     let event_params = {
@@ -130,7 +154,12 @@ export abstract class Base {
       events: [initevent]
     }
 
-    return this.postRequest(`/game/game-event`, event_params);
+    return await this.postRequest(`/game/game-event`, event_params);
+  }
+
+  protected addHours(date:Date, hours:number) {
+    date.setHours(date.getHours() + hours);
+    return date.toString();
   }
 
 }

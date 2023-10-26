@@ -8,12 +8,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EVENTS = void 0;
 const base_1 = require("../base");
 const index_1 = require("../index");
+const exenv_1 = __importDefault(require("exenv"));
 class EVENTS extends base_1.Base {
-    constructor(apiKey, baseUrl) {
+    constructor(apiKey, baseUrl, newSessionId) {
         super(apiKey);
         switch (baseUrl) {
             // case EventsBaseURL.LOCAL: {
@@ -30,17 +34,48 @@ class EVENTS extends base_1.Base {
                 break;
             }
         }
-        // Todo: Move this into the Base Class once Users have been consolidated
-        this.onSessionCreated({
-            sdk_class: "Events"
+    }
+    startSession() {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (exenv_1.default.canUseDOM) {
+                // Todo: Move this into the Base Class once Users have been consolidated
+                return yield this.sessionCreate({
+                    sdk_class: "Events",
+                    type: 'Session Start'
+                });
+            }
+        });
+    }
+    refreshSession() {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (exenv_1.default.canUseDOM) {
+                // Todo: Move this into the Base Class once Users have been consolidated
+                return yield this.sessionCreate({
+                    sdk_class: "Events",
+                    type: 'Session Refresh'
+                });
+            }
         });
     }
     createEvent(events) {
         return __awaiter(this, void 0, void 0, function* () {
+            yield this.updateSessionIdAndStorage();
+            if (!this.sessionID)
+                throw new Error('SDK Session has not been started. Please call the SessionStart function to initialize instance with a Session ID.');
             let created_at = new Date().toISOString();
-            let fingerprint_data = yield this.fingerprint();
-            let helika_referral_link = this.getUrlParam('linkId');
-            let utms = this.getAllUrlParams();
+            let fingerprint_data = {};
+            let helika_referral_link = null;
+            let utms = null;
+            try {
+                if (exenv_1.default.canUseDOM) {
+                    fingerprint_data = yield this.fingerprint();
+                    helika_referral_link = localStorage.getItem('helika_referral_link');
+                    utms = localStorage.getItem('helika_utms');
+                }
+            }
+            catch (e) {
+                console.log(e);
+            }
             let newEvents = events.map(event => {
                 let givenEvent = Object.assign({}, event);
                 givenEvent.event.fingerprint = fingerprint_data;
@@ -59,10 +94,23 @@ class EVENTS extends base_1.Base {
     }
     createUAEvent(events) {
         return __awaiter(this, void 0, void 0, function* () {
+            yield this.updateSessionIdAndStorage();
+            if (!this.sessionID)
+                throw new Error('SDK Session has not been started. Please call the SessionStart function to initialize instance with a Session ID.');
             let created_at = new Date().toISOString();
-            let fingerprint_data = yield this.fingerprint();
-            let helika_referral_link = this.getUrlParam('linkId');
-            let utms = this.getAllUrlParams();
+            let fingerprint_data = {};
+            let helika_referral_link = null;
+            let utms = null;
+            try {
+                if (exenv_1.default.canUseDOM) {
+                    fingerprint_data = yield this.fingerprint();
+                    helika_referral_link = localStorage.getItem('helika_referral_link');
+                    utms = localStorage.getItem('helika_utms');
+                }
+            }
+            catch (e) {
+                console.log(e);
+            }
             let newEvents = events.map(event => {
                 let givenEvent = Object.assign({}, event);
                 givenEvent.event.fingerprint = fingerprint_data;
@@ -78,6 +126,27 @@ class EVENTS extends base_1.Base {
                 events: newEvents
             };
             return this.postRequest(`/game/game-event`, params);
+        });
+    }
+    updateSessionIdAndStorage() {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (exenv_1.default.canUseDOM) {
+                let local_storage_id = localStorage.getItem('sessionID');
+                let expiry = localStorage.getItem('sessionExpiry');
+                if (local_storage_id) {
+                    if (!expiry || (new Date(expiry) < new Date())) {
+                        yield this.refreshSession();
+                    }
+                    else {
+                        this.sessionID = local_storage_id;
+                    }
+                }
+                else if (this.sessionID) { // edge case where localstorage was cleared
+                    localStorage.setItem('sessionID', this.sessionID);
+                    const sessionExpiry = this.addHours(new Date(), 1);
+                    localStorage.setItem('sessionExpiry', sessionExpiry);
+                }
+            }
         });
     }
 }
