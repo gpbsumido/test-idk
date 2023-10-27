@@ -16,17 +16,30 @@ exports.Base = void 0;
 const axios_1 = __importDefault(require("axios"));
 const index_1 = require("./index");
 const uuid_1 = require("uuid");
+const exenv_1 = __importDefault(require("exenv"));
 const fpApiKey = '1V2jYOavAUDljc9GxEgu';
 class Base {
     constructor(apiKey) {
         this.apiKey = apiKey;
-        this.sessionID = (0, uuid_1.v4)();
+        this.sessionID = null;
+        this.sessionExpiry = new Date();
         this.baseUrl = "http://localhost:3000";
     }
     fingerprint() {
         return __awaiter(this, void 0, void 0, function* () {
+            if (new Date() < this.sessionExpiry) {
+                return { data: 'FP data from session start/refresh is still fresh. Fingerprinting not executed.' };
+            }
             let loadOptions = {
-                apiKey: fpApiKey
+                apiKey: fpApiKey,
+                scriptUrlPattern: [
+                    `https://yard.helika.io/8nc7wiyuwhncrhw3/01cb9q093c?apiKey=${fpApiKey}&version=3&loaderVersion=3.8.6`,
+                    index_1.fingerprint.defaultScriptUrlPattern, // Fallback to default CDN in case of error
+                ],
+                endpoint: [
+                    'https://yard.helika.io/8nc7wiyuwhncrhw3/o9wn3zvyblw3v8yi8?region=us',
+                    index_1.fingerprint.defaultEndpoint // Fallback to default endpoint in case of error
+                ],
             };
             let fingerprintData = null;
             try {
@@ -45,10 +58,21 @@ class Base {
     }
     fullFingerprint() {
         return __awaiter(this, void 0, void 0, function* () {
-            let loadOptions = {
-                apiKey: fpApiKey
-            };
+            if (new Date() < this.sessionExpiry) {
+                return { data: 'FP data from session start/refresh is still fresh. Fingerprinting not executed.' };
+            }
             try {
+                let loadOptions = {
+                    apiKey: fpApiKey,
+                    scriptUrlPattern: [
+                        `https://yard.helika.io/8nc7wiyuwhncrhw3/01cb9q093c?apiKey=${fpApiKey}&version=3&loaderVersion=3.8.6`,
+                        index_1.fingerprint.defaultScriptUrlPattern, // Fallback to default CDN in case of error
+                    ],
+                    endpoint: [
+                        'https://yard.helika.io/8nc7wiyuwhncrhw3/o9wn3zvyblw3v8yi8?region=us',
+                        index_1.fingerprint.defaultEndpoint // Fallback to default endpoint in case of error
+                    ],
+                };
                 let loaded = yield index_1.fingerprint.load(loadOptions);
                 let resp = yield loaded.get({
                     extendedResult: true
@@ -116,26 +140,54 @@ class Base {
                 .catch(reject);
         });
     }
-    onSessionCreated(params) {
+    sessionCreate(params) {
         return __awaiter(this, void 0, void 0, function* () {
-            let fpData = yield this.fullFingerprint();
+            this.sessionID = (0, uuid_1.v4)();
+            this.sessionExpiry = this.addHours(new Date(), 1);
+            let fpData = {};
+            let utms = null;
+            let helika_referral_link = null;
+            try {
+                if (exenv_1.default.canUseDOM) {
+                    fpData = yield this.fullFingerprint();
+                    localStorage.setItem('sessionID', this.sessionID);
+                    localStorage.setItem('sessionExpiry', this.sessionExpiry.toString());
+                    utms = this.getAllUrlParams();
+                    helika_referral_link = this.getUrlParam('linkId');
+                    if (utms) {
+                        localStorage.setItem('helika_utms', utms === null || utms === void 0 ? void 0 : utms.toString());
+                    }
+                    if (helika_referral_link) {
+                        localStorage.setItem('helika_referral_link', helika_referral_link);
+                    }
+                }
+            }
+            catch (e) {
+                console.log(e);
+            }
             //send event to initiate session
             var initevent = {
                 created_at: new Date().toISOString(),
                 game_id: 'HELIKA_SDK',
                 event_type: 'SESSION_CREATED',
                 event: {
-                    message: 'Session created',
+                    type: params.type,
                     sdk_class: params.sdk_class,
-                    fp_data: fpData
+                    fp_data: fpData,
+                    helika_referral_link: helika_referral_link,
+                    utms: utms
                 }
             };
             let event_params = {
                 id: this.sessionID,
                 events: [initevent]
             };
-            return this.postRequest(`/game/game-event`, event_params);
+            return yield this.postRequest(`/game/game-event`, event_params);
         });
+    }
+    addHours(date, hours) {
+        date.setHours(date.getHours() + hours);
+        return date.toString();
     }
 }
 exports.Base = Base;
