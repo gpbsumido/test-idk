@@ -23,7 +23,7 @@ export abstract class Base {
     let loadOptions = {
       apiKey: fpApiKey,
       scriptUrlPattern: [
-        `https://yard.helika.io/8nc7wiyuwhncrhw3/01cb9q093c?apiKey=${fpApiKey}&version=3&loaderVersion=3.8.6`,
+        `https://yard.helika.io/8nc7wiyuwhncrhw3/01cb9q093c?apiKey=${fpApiKey}&version=<version>&loaderVersion=<loaderVersion>`,
         fingerprint.defaultScriptUrlPattern, // Fallback to default CDN in case of error
       ],
       endpoint: [
@@ -149,19 +149,19 @@ export abstract class Base {
         }
 
         fpData = await this.fullFingerprint();
-        localStorage.setItem('sessionID',this.sessionID);
-        localStorage.setItem('sessionExpiry',this.sessionExpiry.toString());
+        localStorage.setItem('sessionID', this.sessionID);
+        localStorage.setItem('sessionExpiry', this.sessionExpiry.toString());
         utms = this.getAllUrlParams();
         helika_referral_link = this.getUrlParam('linkId');
         if (utms) {
-          localStorage.setItem('helika_utms',utms?.toString())
+          localStorage.setItem('helika_utms', JSON.stringify(utms))
         }
         if (helika_referral_link) {
-          localStorage.setItem('helika_referral_link',helika_referral_link);
+          localStorage.setItem('helika_referral_link', helika_referral_link);
         }
       }
-    } catch(e) {
-      console.log(e);
+    } catch (e) {
+      console.error(e);
     }
 
     //send event to initiate session
@@ -185,15 +185,15 @@ export abstract class Base {
     return await this.postRequest(`/game/game-event`, event_params);
   }
 
-  protected addHours(date:Date, hours:number) {
+  protected addHours(date: Date, hours: number) {
     date.setHours(date.getHours() + hours);
     return date.toString();
   }
 
-  protected extendSession(){
+  protected extendSession() {
     this.sessionExpiry = this.addHours(new Date(), 6);
     if (ExecutionEnvironment.canUseDOM) {
-      localStorage.setItem('sessionExpiry',this.sessionExpiry);
+      localStorage.setItem('sessionExpiry', this.sessionExpiry);
     };
-  } 
+  }
 }
