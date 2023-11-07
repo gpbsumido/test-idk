@@ -1,6 +1,6 @@
 {
   "name": "@helika-paul/test-sdk-paul-new",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Testing cicd.",
   "main": "dist/index.js",
   "module": "dist/index.m.js",
